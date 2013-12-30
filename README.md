@@ -26,6 +26,15 @@ Small application developed in EmberJS which will help us to manage food spend i
 4. Go to home and create your first order
 5. On localhost:9292/admin you will see the overview what was ordered by who and how much it cost
 
+## Screenshots
+1. Select user
+<img src="https://s3.amazonaws.com/robinbortlik_github/Kitchen+Manager+1.png" alt="Select user">
 
+2. Create your order
+<img src="https://s3.amazonaws.com/robinbortlik_github/Kitchen+Manager+2.png" alt="Create your order">
 
+3. Overview
+<img src="https://s3.amazonaws.com/robinbortlik_github/Kitchen+Manager+3.png" alt="Overview">
 
+4. Admin Product Form
+<img src="https://s3.amazonaws.com/robinbortlik_github/Kitchen+Manager+7.png" alt="Admin product form">
