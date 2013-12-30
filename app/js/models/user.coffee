@@ -5,3 +5,8 @@ App.User = Ember.Resource.define
     name:  String
     image:  String
     deleted:  Boolean
+
+App.User.reopen Ember.Validations,
+  validations:
+    name:
+      presence: true

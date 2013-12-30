@@ -59,16 +59,20 @@ App.AdminUserForm = Em.View.extend
   title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
   actions:
     save: ->
-      isNew = @get("content.isNew")
-      @get("content").save().done =>
-        @destroy()
-        App.get("store.users").pushObject(@get("content")) if isNew
+      if @get("content").validate()
+        isNew = @get("content.isNew")
+        @get("content").save().done =>
+          @destroy()
+          App.get("store.users").pushObject(@get("content")) if isNew
 
-    cancel: -> @destroy()
+    cancel: ->
+      @get("content").expire()
+      @get("content").fetch()
+      @destroy()
 
   template: Em.Handlebars.compile """
     <form class="form-horizontal">
-      <div class="form-group">
+      <div {{bind-attr class=":form-group view.content.validationErrors.name.messages:has-error"}}>
         <label class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Name"}}</div>
       </div>

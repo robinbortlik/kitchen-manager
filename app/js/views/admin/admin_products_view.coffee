@@ -61,20 +61,24 @@ App.AdminProductForm = Em.View.extend
 
   actions:
     save: ->
-      isNew = @get("content.isNew")
-      @get("content").save().done =>
-        @destroy()
-        App.get("store.products").pushObject(@get("content")) if isNew
+      if @get("content").validate()
+        isNew = @get("content.isNew")
+        @get("content").save().done =>
+          @destroy()
+          App.get("store.products").pushObject(@get("content")) if isNew
 
-    cancel: -> @destroy()
+    cancel: ->
+      @get("content").expire()
+      @get("content").fetch()
+      @destroy()
 
   template: Em.Handlebars.compile """
     <form class="form-horizontal">
-      <div class="form-group">
+      <div {{bind-attr class=":form-group view.content.validationErrors.name.messages:has-error"}}>
         <label class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Name"}}</div>
       </div>
-      <div class="form-group">
+      <div {{bind-attr class=":form-group view.content.validationErrors.price.messages:has-error"}}>
         <label class="col-sm-2 control-label">Price</label>
         <div class="col-sm-10">{{input valueBinding="view.content.price" class="form-control" placeholder="Price"}}</div>
       </div>
