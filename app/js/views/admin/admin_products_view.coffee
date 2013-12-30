@@ -68,8 +68,9 @@ App.AdminProductForm = Em.View.extend
           App.get("store.products").pushObject(@get("content")) if isNew
 
     cancel: ->
-      @get("content").expire()
-      @get("content").fetch()
+      unless @get("content.isNew")
+        @get("content").expire()
+        @get("content").fetch()
       @destroy()
 
   template: Em.Handlebars.compile """

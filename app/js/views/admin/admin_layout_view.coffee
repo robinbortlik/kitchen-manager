@@ -11,7 +11,7 @@ App.AdminLayoutView =
 
 App.ModalLayoutView =
   template: Em.Handlebars.compile """
-    <div class="modal fade in" style="display:block;" aria-hidden="false">
+    <div class="modal fade in" style="display:block;" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -28,5 +28,5 @@ App.ModalLayoutView =
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
+    <div class="modal-backdrop fade in"></div>
   """

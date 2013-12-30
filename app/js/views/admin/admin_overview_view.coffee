@@ -57,5 +57,5 @@ App.AdminOverviewRowView = Em.View.extend
     {{#each view.computedContent}}
       <td>{{formatMoney priceSum}} ({{count}}x{{formatMoney price}})</td>
     {{/each}}
-    <td>{{formatMoney view.total}}</td>
+    <td class="text-danger"><strong>{{formatMoney view.total}}</strong></td>
   """
