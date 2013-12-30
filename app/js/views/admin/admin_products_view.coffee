@@ -8,9 +8,13 @@ App.AdminProductsView = Em.View.extend
 
   template: Em.Handlebars.compile """
     <h1>Products</h1>
-    <button type="button" class="btn btn-primary" {{action 'openForm' target='view'}}>New</button>
-    <table class="table table-striped">
-      <thead><th>Id</th><th>Name</th><th>Price</th></thead>
+    <p>
+      <button type="button" class="btn btn-primary" {{action 'openForm' target='view'}}>
+        <span class="glyphicon glyphicon-plus"></span> New
+      </button>
+    </p>
+    <table class="table table-striped  table-hover table-bordered">
+      <thead><th>Id</th><th>Name</th><th>Price</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
           <tr>
@@ -43,6 +47,8 @@ App.AdminProductActionButtons = Em.View.extend
 App.AdminProductForm = Em.View.extend
   layout: App.ModalLayoutView.template
   contextBinding: 'content'
+  title: (-> if @get("content.isNew") then 'Create Product' else 'Edit Product' ).property('content')
+
   save: ->
     isNew = @get("content.isNew")
     @get("content").save().done =>

@@ -1,7 +1,8 @@
 App.AdminOverviewRoute = Ember.Route.extend(
-  model: ->
-    App.get('store.productUsersCollection').expire()
-    App.get('store.productUsersCollection').fetch()
+  setupController: (controller, model) ->
+    controller.set 'fromDate', moment().startOf('month').utc().format('YYYY-MM-DD')
+    controller.set 'toDate', moment().endOf('month').utc().format('YYYY-MM-DD')
+    controller.send('filter')
 )
 
 

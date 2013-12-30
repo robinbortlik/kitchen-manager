@@ -1,7 +1,21 @@
 App.AdminOverviewView = Em.View.extend
   layout: App.AdminLayoutView.template
+
   template: Em.Handlebars.compile """
     <h1>Overview</h1>
+    <p>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="control-label">From</label>
+          {{view App.DateInput valueBinding='controller.fromDate'}}
+          <label class="control-label">To</label>
+          {{view App.DateInput valueBinding='controller.toDate'}}
+          <button type="button" class="btn btn-primary" {{action 'filter' target='view.controller'}}>
+            <span class="glyphicon glyphicon-retweet"></span> Filter
+          </button>
+        </div>
+      </form>
+    </p>
     <table class="table table-striped  table-hover table-bordered">
       <thead>
         <th>Name</th>
@@ -18,10 +32,9 @@ App.AdminOverviewView = Em.View.extend
     </table>
   """
 
-
 App.AdminOverviewRowView = Em.View.extend
   tagName: 'tr'
-  userProducts: (-> @get('controller.content').filterProperty 'user_id', @get('content.id')).property('content')
+  userProducts: (-> Em.makeArray(@get('controller.content')).filterProperty 'user_id', @get('content.id')).property('controller.content')
 
   computedContent: (->
     tmp = []
@@ -33,7 +46,7 @@ App.AdminOverviewRowView = Em.View.extend
         priceSum: (p.reduce ((x,y) -> x + Em.get(y, 'price')), 0).toFixed(2)
       }
     tmp
-  ).property('content')
+  ).property('userProducts')
 
   total: (->
     (@get('computedContent').reduce ((x,y) -> x + parseFloat(Em.get(y, 'priceSum')) ), 0).toFixed(2)
