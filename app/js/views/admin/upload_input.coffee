@@ -34,5 +34,5 @@ App.UploadInput = Ember.View.extend
         ctx.drawImage this, 0, 0, tempW, tempH
         dataURL = canvas.toDataURL("image/jpeg")
         view.set('content.image', dataURL)
-        canvas.destroy()
+        canvas.remove()
     reader.readAsDataURL file

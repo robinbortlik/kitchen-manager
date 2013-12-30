@@ -55,7 +55,7 @@ App.AdminOverviewRowView = Em.View.extend
   template: Em.Handlebars.compile """
     <td>{{view.content.name}}</td>
     {{#each view.computedContent}}
-      <td>{{priceSum}} ({{count}}x{{price}})</td>
+      <td>{{formatMoney priceSum}} ({{count}}x{{formatMoney price}})</td>
     {{/each}}
-    <td>{{view.total}}</td>
+    <td>{{formatMoney view.total}}</td>
   """

@@ -8,7 +8,7 @@ class Application < Sinatra::Base
 
   post '/users' do
     content_type :json
-    user = User.new(name: params[:name], image: params[:image])
+    user = User.new(params.except(*EXCEPTED_PARAMS))
     user.save
     user.to_json
   end
@@ -21,14 +21,7 @@ class Application < Sinatra::Base
   put '/users/:id' do
     content_type :json
     user = User.first(id: params[:id])
-    user.update(name: params[:name], image: params[:image])
-    user.to_json
-  end
-
-  delete '/users/:id' do
-    content_type :json
-    user = User.first(id: params[:id])
-    user.update(deleted: true)
+    user.update(params.except(*EXCEPTED_PARAMS))
     user.to_json
   end
 

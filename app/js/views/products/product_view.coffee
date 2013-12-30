@@ -8,6 +8,6 @@ App.ProductView = Em.View.extend(
       <img class="img-circle" style="width: 140px; height: 140px; background-color: #EEE"/>
     {{/if}}
     <h4>{{view.content.name}}</h4><br/>
-    {{view.content.price}}
+    {{formatMoney view.content.price}}
   """
 )

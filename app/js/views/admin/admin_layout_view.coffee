@@ -15,14 +15,14 @@ App.ModalLayoutView =
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" aria-hidden="true" {{action "destroy" target="view"}}>&times;</button>
+            <button type="button" class="close" aria-hidden="true" {{action "cancel" target="view"}}>&times;</button>
             <h4 class="modal-title">{{view.title}}</h4>
           </div>
           <div class="modal-body">
             {{yield}}
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" {{action "destroy" target="view"}}>Close</button>
+            <button type="button" class="btn btn-default" {{action "cancel" target="view"}}>Close</button>
             <button type="button" class="btn btn-primary" {{action "save" target="view"}}>Save changes</button>
           </div>
         </div><!-- /.modal-content -->

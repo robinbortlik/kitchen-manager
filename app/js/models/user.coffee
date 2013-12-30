@@ -4,3 +4,4 @@ App.User = Ember.Resource.define
     id:    Number
     name:  String
     image:  String
+    deleted:  Boolean

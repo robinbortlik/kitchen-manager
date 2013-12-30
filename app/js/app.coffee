@@ -1,6 +1,7 @@
 window.App = Ember.Application.create(
   rootElement: '#ember-app'
-  LOG_TRANSITIONS: true
+  LOG_TRANSITIONS: false
+  currency: "Kč"
   currentUser: null
   cart: null
   store: null

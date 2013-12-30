@@ -1,10 +1,11 @@
 App.AdminProductsView = Em.View.extend
   layout: App.AdminLayoutView.template
-  openForm: (model) ->
-    view = App.AdminProductForm.create()
-    product = App.Product.create()
-    view.set 'content', product
-    view.appendTo("#ember-app")
+  actions:
+    openForm: (model) ->
+      view = App.AdminProductForm.create()
+      product = App.Product.create()
+      view.set 'content', product
+      view.appendTo("#ember-app")
 
   template: Em.Handlebars.compile """
     <h1>Products</h1>
@@ -13,11 +14,11 @@ App.AdminProductsView = Em.View.extend
         <span class="glyphicon glyphicon-plus"></span> New
       </button>
     </p>
-    <table class="table table-striped  table-hover table-bordered">
+    <table class="table table-hover table-bordered">
       <thead><th>Id</th><th>Name</th><th>Price</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
-          <tr>
+          <tr {{bind-attr class="deleted:danger"}}>
             <td>{{id}}</td>
             <td>{{name}}</td>
             <td>{{price}}</td>
@@ -30,18 +31,27 @@ App.AdminProductsView = Em.View.extend
 
 
 App.AdminProductActionButtons = Em.View.extend
-  openForm: (model) ->
-    view = App.AdminProductForm.create()
-    view.set 'content', @get("content")
-    view.appendTo("#ember-app")
+  actions:
+    openForm: (model) ->
+      view = App.AdminProductForm.create()
+      view.set 'content', @get("content")
+      view.appendTo("#ember-app")
 
-  destroyResource: ->
-    @get("content").destroyResource()
-    App.get("store.products").removeObject(@get("content"))
+    destroyResource: ->
+      @set("content.deleted", true)
+      @get("content").save()
+
+    activateResource: ->
+      @set("content.deleted", false)
+      @get("content").save()
 
   template: Em.Handlebars.compile """
-    <span class="glyphicon glyphicon-pencil" {{action "openForm" target="view"}}></span>
-    <span class="glyphicon glyphicon-trash" {{action "destroyResource" target="view"}}></span>
+    {{#if deleted}}
+      <span class="glyphicon glyphicon-refresh" {{action "activateResource" target="view"}}></span>
+    {{else}}
+      <span class="glyphicon glyphicon-pencil" {{action "openForm" target="view"}}></span>
+      <span class="glyphicon glyphicon-trash" {{action "destroyResource" target="view"}}></span>
+    {{/if}}
   """
 
 App.AdminProductForm = Em.View.extend
@@ -49,11 +59,14 @@ App.AdminProductForm = Em.View.extend
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create Product' else 'Edit Product' ).property('content')
 
-  save: ->
-    isNew = @get("content.isNew")
-    @get("content").save().done =>
-      @destroy()
-      App.get("store.products").pushObject(@get("content")) if isNew
+  actions:
+    save: ->
+      isNew = @get("content.isNew")
+      @get("content").save().done =>
+        @destroy()
+        App.get("store.products").pushObject(@get("content")) if isNew
+
+    cancel: -> @destroy()
 
   template: Em.Handlebars.compile """
     <form class="form-horizontal">

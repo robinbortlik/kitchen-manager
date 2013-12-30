@@ -8,7 +8,7 @@ class Application < Sinatra::Base
 
   post '/products' do
     content_type :json
-    product = Product.new(name: params[:name], image: params[:image], price: params[:price])
+    product = Product.new(params.except(*EXCEPTED_PARAMS))
     product.save
     product.to_json
   end
@@ -21,14 +21,7 @@ class Application < Sinatra::Base
   put '/products/:id' do
     content_type :json
     product = Product.first(id: params[:id])
-    product.update(name: params[:name], image: params[:image], price: params[:price])
-    product.to_json
-  end
-
-  delete '/products/:id' do
-    content_type :json
-    product = Product.first(id: params[:id])
-    product.update(deleted: true)
+    product.update(params.except(*EXCEPTED_PARAMS))
     product.to_json
   end
 end

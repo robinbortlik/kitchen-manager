@@ -5,3 +5,4 @@ App.Product = Ember.Resource.define
     name:  String
     price:  Number
     image:  String
+    deleted:  Boolean

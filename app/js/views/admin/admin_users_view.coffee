@@ -1,10 +1,11 @@
 App.AdminUsersView = Em.View.extend
   layout: App.AdminLayoutView.template
-  openForm: (model) ->
-    view = App.AdminUserForm.create()
-    user = App.User.create()
-    view.set 'content', user
-    view.appendTo("#ember-app")
+  actions:
+    openForm: (model) ->
+      view = App.AdminUserForm.create()
+      user = App.User.create()
+      view.set 'content', user
+      view.appendTo("#ember-app")
 
   template: Em.Handlebars.compile """
     <h1>Users</h1>
@@ -13,11 +14,11 @@ App.AdminUsersView = Em.View.extend
         <span class="glyphicon glyphicon-plus"></span> New
       </button>
     </p>
-    <table class="table table-striped  table-hover table-bordered">
+    <table class="table table-hover table-bordered">
       <thead><th>Id</th><th>Name</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
-          <tr>
+          <tr {{bind-attr class="deleted:danger"}}>
             <td>{{id}}</td>
             <td>{{name}}</td>
             <td>{{view App.AdminUserActionButtons contentBinding="this"}}</td>
@@ -29,30 +30,41 @@ App.AdminUsersView = Em.View.extend
 
 
 App.AdminUserActionButtons = Em.View.extend
-  openForm: (model) ->
-    view = App.AdminUserForm.create()
-    view.set 'content', @get("content")
-    view.appendTo("#ember-app")
+  actions:
+    openForm: (model) ->
+      view = App.AdminUserForm.create()
+      view.set 'content', @get("content")
+      view.appendTo("#ember-app")
 
-  destroyResource: ->
-    @get("content").destroyResource()
-    App.get("store.users").removeObject(@get("content"))
+    destroyResource: ->
+      @set("content.deleted", true)
+      @get("content").save()
+
+    activateResource: ->
+      @set("content.deleted", false)
+      @get("content").save()
 
   template: Em.Handlebars.compile """
-    <span class="glyphicon glyphicon-pencil" {{action "openForm" target="view"}}></span>
-    <span class="glyphicon glyphicon-trash" {{action "destroyResource" target="view"}}></span>
+    {{#if deleted}}
+      <span class="glyphicon glyphicon-refresh" {{action "activateResource" target="view"}}></span>
+    {{else}}
+      <span class="glyphicon glyphicon-pencil" {{action "openForm" target="view"}}></span>
+      <span class="glyphicon glyphicon-trash" {{action "destroyResource" target="view"}}></span>
+    {{/if}}
   """
 
 App.AdminUserForm = Em.View.extend
   layout: App.ModalLayoutView.template
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
+  actions:
+    save: ->
+      isNew = @get("content.isNew")
+      @get("content").save().done =>
+        @destroy()
+        App.get("store.users").pushObject(@get("content")) if isNew
 
-  save: ->
-    isNew = @get("content.isNew")
-    @get("content").save().done =>
-      @destroy()
-      App.get("store.users").pushObject(@get("content")) if isNew
+    cancel: -> @destroy()
 
   template: Em.Handlebars.compile """
     <form class="form-horizontal">
