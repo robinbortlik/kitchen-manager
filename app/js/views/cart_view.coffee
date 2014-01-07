@@ -1,5 +1,5 @@
 App.CartView = Em.View.extend(
-
+  totalPrice:(-> App.get('cart.totalPrice') ).property('App.cart.totalPrice')
   actions:
     cancel: -> @get('controller').transitionToRoute "users"
 
@@ -19,14 +19,29 @@ App.CartView = Em.View.extend(
           App.FlashMessageView.createMessage("We are sorry but something were wrong. Try it again later.", 'danger')
       )
 
+    openUserOverview: ->
+      view = App.OrderUserOverviewView.create()
+      view.appendTo("#ember-app")
+
   template: Em.Handlebars.compile """
     <div class="col-md-3"">
-      <button type="button" class="btn btn-danger" {{action "cancel" target="view"}}>Cancel</button>
-      <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
-      {{#each view.content}}
-        {{view App.CartItemView contentBinding="this"}}
-      {{/each}}
+      <p>
+        <button type="button" class="btn btn-danger" {{action "cancel" target="view"}}>Cancel</button>
+        <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> <a {{action "openUserOverview" target="view"}}>Overview</a></div>
+        <div class="panel-body">
+          {{#if view.content}}
+            {{#each view.content}}
+              {{view App.CartItemView contentBinding="this"}}
+            {{/each}}
+          {{else}}
+            Start by selecting some product
+          {{/if}}
+        </div>
     </div>
+  </div>
   """
 )
 
@@ -38,7 +53,8 @@ App.CartItemView = Em.View.extend(
     {{else}}
       <img class="img-circle" style="width: 60px; height: 60px; background-color: #EEE"/>
     {{/if}}
-    <strong>{{view.content.name}}&nbsp;{{view.content.count}}x ({{formatMoney view.content.total}})</strong>
+    {{view.content.name}}
+    <div>{{view.content.count}}x ({{formatMoney view.content.total}})</div>
   """
 
   click: -> App.removeFromBasket(@get("content.id"))

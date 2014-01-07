@@ -2,6 +2,7 @@ window.Store = Em.Object.extend
   users: (-> @get('usersCollection.content')).property('usersCollection.content')
   products: (-> @get('productsCollection.content')).property('productsCollection.content')
   productUsers: (-> @get('productUsersCollection.content')).property('productUsersCollection.content')
+  currentUserProducts: []
 
   init: ->
     @_super()

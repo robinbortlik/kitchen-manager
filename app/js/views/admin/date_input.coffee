@@ -17,7 +17,7 @@ App.DateInput = Em.TextField.extend
     return if @get('hasFocus')
     date = @get('date')
     if date
-      @set('value', if moment.isMoment(date) then date.utc().format(@get('dateFormat')) else moment.utc(date))
+      @set('value', date.format(@get('dateFormat')))
   ).observes('date')
 
   focusIn: ->

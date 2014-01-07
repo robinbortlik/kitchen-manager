@@ -20,7 +20,7 @@ App.AdminOverviewView = Em.View.extend
       <thead>
         <th>Name</th>
         {{#each App.store.products}}
-          <th>{{name}}</th>
+          <th>{{name}}<br/>{{formatMoney price}}</th>
         {{/each}}
         <th>Sum</th>
       </thead>
@@ -39,23 +39,18 @@ App.AdminOverviewRowView = Em.View.extend
   computedContent: (->
     tmp = []
     for product in App.get('store.products')
-      p = @get('userProducts').filterProperty 'product_id', product.get('id')
-      tmp.push {
-        count: p.length
-        price: (if p[0] then Em.get(p[0], 'price') else 0).toFixed(2)
-        priceSum: (p.reduce ((x,y) -> x + Em.get(y, 'price')), 0).toFixed(2)
-      }
+      tmp.push @get('userProducts').filterProperty('product_id', product.get('id')).length
     tmp
   ).property('userProducts')
 
   total: (->
-    (@get('computedContent').reduce ((x,y) -> x + parseFloat(Em.get(y, 'priceSum')) ), 0).toFixed(2)
-  ).property('computedContent')
+    (@get('userProducts').reduce ((x,y) -> x + parseFloat(Em.get(y, 'price')) ), 0).toFixed(2)
+  ).property('userProducts')
 
   template: Em.Handlebars.compile """
     <td>{{view.content.name}}</td>
     {{#each view.computedContent}}
-      <td>{{formatMoney priceSum}} ({{count}}x{{formatMoney price}})</td>
+      <td>{{this}}</td>
     {{/each}}
     <td class="text-danger"><strong>{{formatMoney view.total}}</strong></td>
   """

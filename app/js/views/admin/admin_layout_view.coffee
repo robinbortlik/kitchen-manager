@@ -30,3 +30,21 @@ App.ModalLayoutView =
     </div><!-- /.modal -->
     <div class="modal-backdrop fade in"></div>
   """
+
+App.LargeModalLayoutView =
+  template: Em.Handlebars.compile """
+    <div class="modal fade in" style="display:block;" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog large">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" aria-hidden="true" {{action "cancel" target="view"}}>&times;</button>
+            <h4 class="modal-title">{{view.title}}</h4>
+          </div>
+          <div class="modal-body">
+            {{yield}}
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal-backdrop fade in"></div>
+  """

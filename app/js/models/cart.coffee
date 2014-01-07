@@ -1,5 +1,6 @@
 App.Cart = Em.Object.extend
   content: []
+
   calculatedContent: (->
     tmp = {}
     for item in @get('content')
@@ -12,4 +13,8 @@ App.Cart = Em.Object.extend
       total = (parseInt(Em.get(v, 'count')) * parseFloat(Em.get(v, 'price'))).toFixed(2)
       result.push {id: k, name: Em.get(v, 'name'), count: Em.get(v, 'count'), image: Em.get(v, "image"), total: total}
     result
+  ).property('content.@each')
+
+  totalPrice: (->
+    (@get('content').reduce ((x,y) -> x + Em.get(y, 'price')), 0).toFixed(2)
   ).property('content.@each')
