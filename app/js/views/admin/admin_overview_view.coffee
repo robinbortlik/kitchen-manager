@@ -44,13 +44,29 @@ App.AdminOverviewRowView = Em.View.extend
   ).property('userProducts')
 
   total: (->
-    (@get('userProducts').reduce ((x,y) -> x + parseFloat(Em.get(y, 'price')) ), 0).toFixed(2)
+    @get('userProducts').sum('price').toFixed(2)
   ).property('userProducts')
+
+  isPaid: (->
+    not @get('userProducts').find((up) -> not Em.get(up,'isPaid') )
+  ).property("userProducts")
+
+  notPaid: (->
+    @get('userProducts').filter((up) -> not Em.get(up,'isPaid') ).sum('price').toFixed(2)
+  ).property("userProducts")
+
+  paid: (->
+    @get('userProducts').filterProperty('isPaid').sum('price').toFixed(2)
+  ).property("userProducts")
 
   template: Em.Handlebars.compile """
     <td>{{view.content.name}}</td>
     {{#each view.computedContent}}
       <td>{{this}}</td>
     {{/each}}
-    <td class="text-danger"><strong>{{formatMoney view.total}}</strong></td>
+    {{#if view.isPaid}}
+      <td><strong class="text-success">{{formatMoney view.total}}</strong></td>
+    {{else}}
+      <td><strong class="text-danger">{{formatMoney view.total}}</strong>&nbsp;<small>({{view.notPaid}}/{{view.paid}})</small></td>
+    {{/if}}
   """

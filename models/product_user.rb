@@ -6,6 +6,7 @@ class ProductUser
   property :price, Float
   property :name, String
   property :created_at, DateTime
+  property :is_paid, Boolean
 
   def self.store_order(products_params, user_id)
     created_at = Time.now

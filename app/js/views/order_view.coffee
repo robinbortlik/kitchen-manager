@@ -11,7 +11,7 @@ App.OrderView = Em.View.extend(
 App.OrderUserOverviewView = Em.View.extend(
   title: "Overview"
   layout: App.LargeModalLayoutView.template
-  year: 2014
+  year: (-> moment().get('year') ).property()
   months: (-> moment.months() ).property()
   actions:
     cancel: -> @destroy()
@@ -61,15 +61,16 @@ App.UserOverviewColumnHeaderView = Em.View.extend
 
 App.UserOverviewRowView = Em.View.extend
   tagName: 'tr'
+  classNameBindings: ["isCurrentMonth:green"]
 
   monthIndex: (-> moment.months().indexOf(@get("month"))).property("content")
-
+  isCurrentMonth: (-> @get("monthIndex") == moment().get("month") ).property("monthIndex")
   monthProducts: (->
     Em.makeArray(App.get('store.currentUserProducts')).filter (userProduct) =>
       moment(Em.get(userProduct, 'created_at')).get('month') == @get("monthIndex")
   ).property("monthIndex", "App.store.currentUserProducts")
 
-  computedContent: (->
+  productsPerMonth: (->
     tmp = []
     for product in App.get('store.products')
       monthProducts = @get("monthProducts").filter (userProduct) => Em.get(userProduct, 'product_id') == product.get('id')
@@ -78,12 +79,12 @@ App.UserOverviewRowView = Em.View.extend
   ).property('monthProducts')
 
   total: (->
-    (@get("monthProducts").reduce ((x,y) -> x + parseFloat(Em.get(y, 'price')) ), 0).toFixed(2)
+    @get("monthProducts").sum("price").toFixed(2)
   ).property('monthProducts')
 
   template: Em.Handlebars.compile """
     <td>{{view.month}}</td>
-    {{#each view.computedContent}}
+    {{#each view.productsPerMonth}}
       <td>{{this}}</td>
     {{/each}}
     <td class="text-danger"><strong>{{formatMoney view.total}}</strong></td>

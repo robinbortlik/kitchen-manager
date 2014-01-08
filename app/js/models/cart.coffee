@@ -16,5 +16,5 @@ App.Cart = Em.Object.extend
   ).property('content.@each')
 
   totalPrice: (->
-    (@get('content').reduce ((x,y) -> x + Em.get(y, 'price')), 0).toFixed(2)
+    @get('content').sum("price").toFixed(2)
   ).property('content.@each')
