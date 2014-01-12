@@ -1,13 +1,12 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 ruby '2.0.0'
 
-
 gem 'sinatra', '>=1.4.4', :require => "sinatra/base"
-gem 'thin', '>=1.6.0'
+gem 'puma'
 gem 'coffee-script', '>=1.6.3'
 gem 'sass', '>=3.3.0.rc.2'
-gem 'datamapper'
 gem 'rack-contrib'
+gem 'datamapper'
 gem 'dm-sqlite-adapter'
 gem 'sinatra-assetpack', '>=0.3.1',  :require => 'sinatra/assetpack'
 gem 'pry'

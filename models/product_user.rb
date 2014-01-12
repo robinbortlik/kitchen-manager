@@ -14,7 +14,7 @@ class ProductUser
       begin
         Array(products_params).each do |k, v|
           product_user = ProductUser.new(product_id: v[:id], name: v[:name], price: v[:price], user_id: user_id, created_at: created_at)
-          product_user.save
+          product_user.save!
         end
         true
       rescue DataObjects::Error
@@ -23,4 +23,5 @@ class ProductUser
       end
     end
   end
+
 end

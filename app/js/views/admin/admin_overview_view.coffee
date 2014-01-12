@@ -23,6 +23,7 @@ App.AdminOverviewView = Em.View.extend
           <th>{{name}}<br/>{{formatMoney price}}</th>
         {{/each}}
         <th>Sum</th>
+        <th></th>
       </thead>
       <tbody>
         {{#each App.store.users}}
@@ -48,16 +49,38 @@ App.AdminOverviewRowView = Em.View.extend
   ).property('userProducts')
 
   isPaid: (->
-    not @get('userProducts').find((up) -> not Em.get(up,'isPaid') )
+    not @get('userProducts').find((up) -> not Em.get(up,'is_paid') )
   ).property("userProducts")
 
   notPaid: (->
-    @get('userProducts').filter((up) -> not Em.get(up,'isPaid') ).sum('price').toFixed(2)
+    @get('userProducts').filter((up) -> not Em.get(up,'is_paid') ).sum('price').toFixed(2)
   ).property("userProducts")
 
   paid: (->
-    @get('userProducts').filterProperty('isPaid').sum('price').toFixed(2)
+    @get('userProducts').filterProperty('is_paid').sum('price').toFixed(2)
   ).property("userProducts")
+
+  actions:
+    togglePay: ->
+      if confirm("Are you sure?")
+        is_paid = not @get('isPaid')
+        $.ajax(
+          type: "PUT"
+          url: 'product_users/update_is_paid'
+          data: {ids: @get("userProducts").mapProperty("id"), is_paid: is_paid}
+          success: (response) =>
+            @get("userProducts").setEach("is_paid", is_paid)
+            App.FlashMessageView.createMessage("Paid status was set to #{is_paid}", 'success')
+            @propertyDidChange("userProducts")
+
+          error: (response) ->
+            App.FlashMessageView.createMessage("We are sorry but something were wrong. Try it again later.", 'danger')
+        )
+
+  didInsertElement: ->
+    setTimeout ->
+      $("[data-toggle=tooltip]").tooltip()
+    , 100
 
   template: Em.Handlebars.compile """
     <td>{{view.content.name}}</td>
@@ -67,6 +90,14 @@ App.AdminOverviewRowView = Em.View.extend
     {{#if view.isPaid}}
       <td><strong class="text-success">{{formatMoney view.total}}</strong></td>
     {{else}}
-      <td><strong class="text-danger">{{formatMoney view.total}}</strong>&nbsp;<small>({{view.notPaid}}/{{view.paid}})</small></td>
+      <td>
+        <strong class="text-danger">{{formatMoney view.total}}</strong>&nbsp;
+        (
+          <small data-toggle="tooltip" title="Is missing to pay">{{view.notPaid}}</small>
+          /
+          <small data-toggle="tooltip" title="Was already paid">{{view.paid}}</small>
+        )
+      </td>
     {{/if}}
+    <td {{bindAttr class="view.isPaid:text-success"}}><i {{action "togglePay" target="view"}} class="glyphicon glyphicon-check"></i></td>
   """

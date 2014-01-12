@@ -79,13 +79,41 @@ App.UserOverviewRowView = Em.View.extend
   ).property('monthProducts')
 
   total: (->
-    @get("monthProducts").sum("price").toFixed(2)
+    @get('monthProducts').sum('price').toFixed(2)
   ).property('monthProducts')
+
+  isPaid: (->
+    not @get('monthProducts').find((up) -> not Em.get(up,'is_paid') )
+  ).property("monthProducts")
+
+  notPaid: (->
+    @get('monthProducts').filter((up) -> not Em.get(up,'is_paid') ).sum('price').toFixed(2)
+  ).property("monthProducts")
+
+  paid: (->
+    @get('monthProducts').filterProperty('is_paid').sum('price').toFixed(2)
+  ).property("monthProducts")
+
+  didInsertElement: ->
+    setTimeout ->
+      $("[data-toggle=tooltip]").tooltip()
+    , 100
 
   template: Em.Handlebars.compile """
     <td>{{view.month}}</td>
     {{#each view.productsPerMonth}}
       <td>{{this}}</td>
     {{/each}}
-    <td class="text-danger"><strong>{{formatMoney view.total}}</strong></td>
+    {{#if view.isPaid}}
+      <td><strong class="text-success">{{formatMoney view.total}}</strong></td>
+    {{else}}
+      <td>
+        <strong class="text-danger">{{formatMoney view.total}}</strong>&nbsp;
+        (
+          <small data-toggle="tooltip" title="Is missing to pay">{{view.notPaid}}</small>
+          /
+          <small data-toggle="tooltip" title="Was already paid">{{view.paid}}</small>
+        )
+      </td>
+    {{/if}}
   """
