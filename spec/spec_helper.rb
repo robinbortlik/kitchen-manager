@@ -5,6 +5,7 @@ require 'sinatra'
 Sinatra::Application.environment = :test
 
 require 'capybara/rspec'
+require 'capybara-webkit'
 require 'database_cleaner'
 require 'rack/test'
 require 'rspec'
@@ -22,18 +23,19 @@ set :raise_errors, true
 set :logging, false
 
 def app
-  Rack::Builder.parse_file(File.expand_path('../../config.ru', __FILE__)).first 
+  Rack::Builder.parse_file(File.expand_path('../../config.ru', __FILE__)).first
 end
 
+Capybara.javascript_driver = :webkit
 Capybara.app =  app
- 
+
 RSpec.configure do |config|
   DatabaseCleaner.strategy = :truncation
-  
+
   config.include Rack::Test::Methods
   config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
-  
+
   config.before(:each) do
     DatabaseCleaner.start
   end
@@ -41,5 +43,5 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
+
 end

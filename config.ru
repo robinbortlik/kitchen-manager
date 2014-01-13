@@ -9,4 +9,7 @@ require './config/environment'
 require './application'
 
 run Application
-use Rack::PostBodyContentTypeParser
+
+use Rack::Parser, :content_types => {
+  'application/json'  => Proc.new { |body| ::MultiJson.decode body }
+}

@@ -2,8 +2,13 @@ App.AdminOverviewController = Ember.ArrayController.extend(
   fromDate: null
   toDate: null
   contentBinding: 'App.store.productUsers'
-  actions :
+  actions:
     filter: ->
       App.get('store.productUsersCollection').expire()
-      App.get('store.productUsersCollection').fetch({data: {from: @get('fromDate'), to: @get('toDate')}})
+      Em.run.next =>
+        App.get('store.productUsersCollection').fetch({data: {from: @get('fromDate'), to: @get('toDate')}})
+
+  fromToDateObserver: (->
+    @send("filter")
+  ).observes("fromDate", "toDate")
 )

@@ -7,12 +7,9 @@ App.AdminOverviewView = Em.View.extend
       <form class="form-inline">
         <div class="form-group">
           <label class="control-label">From</label>
-          {{view App.DateInput valueBinding='controller.fromDate'}}
+          {{view App.DatePicker valueBinding='controller.fromDate'}}
           <label class="control-label">To</label>
-          {{view App.DateInput valueBinding='controller.toDate'}}
-          <button type="button" class="btn btn-primary" {{action 'filter' target='view.controller'}}>
-            <span class="glyphicon glyphicon-retweet"></span> Filter
-          </button>
+          {{view App.DatePicker valueBinding='controller.toDate'}}
         </div>
       </form>
     </p>
