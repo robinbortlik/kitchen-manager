@@ -20,6 +20,7 @@ group :test do
   gem 'factory_girl'       # Fixtures
   gem 'jasmine'
   gem 'guard-coffeescript'
+  gem 'guard-rspec'
   gem 'guard-spork'
   gem "capybara-webkit"
 end

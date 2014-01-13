@@ -6,10 +6,12 @@ App.AdminOverviewView = Em.View.extend
     <p>
       <form class="form-inline">
         <div class="form-group">
-          <label class="control-label">From</label>
-          {{view App.DatePicker valueBinding='controller.fromDate'}}
-          <label class="control-label">To</label>
-          {{view App.DatePicker valueBinding='controller.toDate'}}
+          <label class="control-label">From
+            {{view App.DatePicker valueBinding='controller.fromDate'}}
+          </label>
+          <label class="control-label">To
+            {{view App.DatePicker valueBinding='controller.toDate'}}
+          </label>
         </div>
       </form>
     </p>
