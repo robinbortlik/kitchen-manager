@@ -1,6 +1,6 @@
 App.FlashMessageView = Em.View.extend
   template: Em.Handlebars.compile """
-    <div {{bindAttr class=":alert view.messageType"}}>{{view.message}}</div>
+    <div {{bind-attr class=":alert view.messageType"}}>{{view.message}}</div>
   """
 
   didInsertElement: ->

@@ -77,7 +77,7 @@ App.AdminOverviewRowView = Em.View.extend
   didInsertElement: ->
     setTimeout ->
       $("[data-toggle=tooltip]").tooltip()
-    , 100
+    , 500
 
   template: Em.Handlebars.compile """
     <td>{{view.content.name}}</td>
@@ -96,5 +96,5 @@ App.AdminOverviewRowView = Em.View.extend
         )
       </td>
     {{/if}}
-    <td {{bindAttr class="view.isPaid:text-success"}}><i {{action "togglePay" target="view"}} class="glyphicon glyphicon-check"></i></td>
+    <td {{bind-attr class="view.isPaid:text-success"}}><i {{action "togglePay" target="view"}} class="glyphicon glyphicon-check"></i></td>
   """

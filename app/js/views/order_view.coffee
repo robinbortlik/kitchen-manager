@@ -97,7 +97,7 @@ App.UserOverviewRowView = Em.View.extend
   didInsertElement: ->
     setTimeout ->
       $("[data-toggle=tooltip]").tooltip()
-    , 100
+    , 500
 
   template: Em.Handlebars.compile """
     <td>{{view.month}}</td>

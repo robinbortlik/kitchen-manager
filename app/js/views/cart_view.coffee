@@ -49,7 +49,7 @@ App.CartItemView = Em.View.extend(
   classNames: ["col-lg-9"]
   template: Em.Handlebars.compile """
     {{#if view.content.image}}
-      <img class="img-circle" alt="140x140" style="width: 60px; height: 60px;" {{bindAttr src="view.content.image"}}>
+      <img class="img-circle" alt="140x140" style="width: 60px; height: 60px;" {{bind-attr src="view.content.image"}}>
     {{else}}
       <img class="img-circle" style="width: 60px; height: 60px; background-color: #EEE"/>
     {{/if}}
