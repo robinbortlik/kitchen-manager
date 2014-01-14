@@ -6,3 +6,4 @@ App.ProductUser = Ember.Resource.define
     user_id: Number
     name:  String
     price:  Number
+    is_paid: Boolean
