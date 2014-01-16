@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/robinbortlik/kitchen-manager.png?branch=master)](https://secure.travis-ci.org/robinbortlik/kitchen-manager)
+
 # Kitchen manager
 
 Small application developed in EmberJS which will help us to manage food spend in our company's kitchen
