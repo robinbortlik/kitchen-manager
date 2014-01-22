@@ -15,3 +15,5 @@ App.User.reopen Ember.Validations,
     name_array = (@get("name") || "").split(" ")
     (name_array[name_array.length - 1]).charAt(0).toUpperCase()
   ).property("name")
+
+  mergedName: (-> @get("name").replace(" ","").toUpperCase()).property("name")

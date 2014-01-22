@@ -4,3 +4,4 @@ public/javascripts/compiled
 spec/javascripts/compiled
 db/*.db
 tmp
+seed.rb

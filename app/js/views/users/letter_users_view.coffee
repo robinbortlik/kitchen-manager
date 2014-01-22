@@ -1,5 +1,14 @@
 App.LetterUsersView = Em.View.extend(
-  classNames: ['letter']
-  click: -> @set("controller.selectedLetter", @get("content"))
+  classNameBindings: [":letter", "active"]
+
+  active: (->
+    @get('controller.availableLetters').contains(@get('content'))
+  ).property('content', 'controller.availableLetters')
+
+  click: ->
+    if @get('active')
+      @get("controller.selectedLetters.content").pushObject(@get("content"))
+
+
   template: Em.Handlebars.compile """{{view.content}}"""
 )
