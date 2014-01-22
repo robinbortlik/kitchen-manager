@@ -1,12 +1,16 @@
 App.UsersView = Em.View.extend(
   template: Em.Handlebars.compile """
     <h1>Hi dude, so please first identify yourself</h1>
-
-    {{#each controller.letters}}
-      <h2>{{this}}</h2><hr />
+    {{#if controller.selectedLetter}}
       <div class="row">
-        {{view App.LetterUsersView contentBinding="this"}}
+        {{#each controller.selectedUsers}}
+          {{view App.UserView contentBinding="this" controllerBinding="view.controller"}}
+        {{/each}}
       </div>
-    {{/each}}
+    {{else}}
+      {{#each controller.letters}}
+        {{view App.LetterUsersView contentBinding="this"}}
+      {{/each}}
+    {{/if}}
   """
 )

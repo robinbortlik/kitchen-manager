@@ -25,4 +25,21 @@ class Application < Sinatra::Base
     end
     "".to_json
   end
+
+  get '/product_users.csv' do
+    content_type 'application/octet-stream'
+    product_users = ProductUser.all()
+    products = Product.all
+    users = User.all
+    csv_string = CSV.generate do |csv|
+      csv << [""] + products.map(&:name) + ["Sum"]
+      users.each do |u|
+        pus = product_users.select{|pu| pu.user_id == u.id}
+        tmp = products.map {|p| pus.select{|pu| pu.product_id == p.id }.map(&:price).reduce(:+) }
+        csv << [u.name] + tmp + [tmp.compact.reduce(:+)]
+      end
+      csv
+    end
+    csv_string
+  end
 end

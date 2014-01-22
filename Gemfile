@@ -11,6 +11,7 @@ gem 'dm-sqlite-adapter'
 gem 'sinatra-assetpack', '>=0.3.1',  :require => 'sinatra/assetpack'
 gem 'pry'
 gem 'rack-parser', :require => 'rack/parser'
+gem 'axlsx'
 
 group :test do
   gem 'rspec'            # Rspec tests
