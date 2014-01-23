@@ -16,6 +16,9 @@ App.UsersView = Em.View.extend(
       e.preventDefault()
       e.stopPropagation()
 
+  willDestroyElement: ->
+    $(document).off 'keydown'
+
   template: Em.Handlebars.compile """
     <div class="row">
       {{#each controller.letters}}

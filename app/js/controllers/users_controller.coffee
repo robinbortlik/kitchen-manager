@@ -18,12 +18,17 @@ App.UsersController = Ember.Controller.extend(
     tmp = []
     letters = @get('selectedLetters.content').join("")
     @get("selectedUsers").forEach (u) =>
-      index = u.get("mergedName").indexOf(letters) + letters.length
-      if char = u.get("mergedName").charAt(index)
-        tmp.push char
-      #tmp = tmp.concat u.get("mergedName").replace(///(.+)#{letters}///,"").split("")
+      indexes = @lettersLocations letters, u.get("mergedName")
+      for i in indexes
+        tmp.push(char) if char = u.get("mergedName").charAt(i+letters.length)
     tmp.uniq()
   ).property('selectedUsers.@each')
+
+  lettersLocations: (substring, string) ->
+    a = []
+    i = -1
+    a.push i  while (i = string.indexOf(substring, i + 1)) >= 0
+    a
 
   letters: (->
     String.fromCharCode(i) for i in [65..90]
