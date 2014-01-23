@@ -1,9 +1,11 @@
+#!/usr/bin/env rake
+require 'rspec/core'
+require 'rspec/core/rake_task'
+require 'jasmine'
+load 'jasmine/tasks/jasmine.rake'
 
-begin
-  require 'jasmine'
-  load 'jasmine/tasks/jasmine.rake'
-rescue LoadError
-  task :jasmine do
-    abort "Jasmine is not available. In order to run jasmine, you must: (sudo) gem install jasmine"
-  end
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = FileList['spec/**/*_spec.rb']
 end
+
+task :default => :spec
