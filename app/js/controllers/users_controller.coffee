@@ -18,7 +18,10 @@ App.UsersController = Ember.Controller.extend(
     tmp = []
     letters = @get('selectedLetters.content').join("")
     @get("selectedUsers").forEach (u) =>
-      tmp = tmp.concat u.get("mergedName").replace(///(.+)#{letters}///,"").split("")
+      index = u.get("mergedName").indexOf(letters) + letters.length
+      if char = u.get("mergedName").charAt(index)
+        tmp.push char
+      #tmp = tmp.concat u.get("mergedName").replace(///(.+)#{letters}///,"").split("")
     tmp.uniq()
   ).property('selectedUsers.@each')
 
