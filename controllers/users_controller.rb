@@ -2,6 +2,7 @@
 class Application < Sinatra::Base
 
   get '/users' do
+    response.headers['Cache-Control'] = 'no-cache'
     content_type :json
     User.all.to_json
   end
@@ -14,6 +15,7 @@ class Application < Sinatra::Base
   end
 
   get '/users/:id' do
+    response.headers['Cache-Control'] = 'no-cache'
     content_type :json
     User.first(id: params[:id]).to_json
   end

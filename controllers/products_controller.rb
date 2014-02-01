@@ -2,6 +2,7 @@
 class Application < Sinatra::Base
 
   get '/products' do
+    response.headers['Cache-Control'] = 'no-cache'
     content_type :json
     Product.all.to_json
   end
@@ -14,6 +15,7 @@ class Application < Sinatra::Base
   end
 
   get '/products/:id' do
+    response.headers['Cache-Control'] = 'no-cache'
     content_type :json
     Product.first(id: params[:id]).to_json
   end
