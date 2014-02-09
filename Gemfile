@@ -12,6 +12,7 @@ gem 'sinatra-assetpack', '>=0.3.1',  :require => 'sinatra/assetpack'
 gem 'pry'
 gem 'rack-parser', :require => 'rack/parser'
 gem 'axlsx'
+gem 'sort_alphabetical'
 
 group :test do
   gem 'rspec'            # Rspec tests

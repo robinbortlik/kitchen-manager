@@ -4,7 +4,7 @@ class Application < Sinatra::Base
   get '/users' do
     response.headers['Cache-Control'] = 'no-cache'
     content_type :json
-    User.all.to_json
+    User.all.sort_alphabetical_by(&:last_name).to_json
   end
 
   post '/users' do

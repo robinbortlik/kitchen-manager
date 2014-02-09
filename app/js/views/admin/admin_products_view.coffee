@@ -15,13 +15,14 @@ App.AdminProductsView = Em.View.extend
       </button>
     </p>
     <table class="table table-hover table-bordered">
-      <thead><th>Id</th><th>Name</th><th>Price</th><th></th></thead>
+      <thead><th>Id</th><th>Name</th><th>Price</th><th>Category</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
           <tr {{bind-attr class="deleted:danger"}}>
             <td>{{id}}</td>
             <td>{{name}}</td>
             <td>{{price}}</td>
+            <td>{{category.name}}</td>
             <td>{{view App.AdminProductActionButtons contentBinding="this"}}</td>
           </tr>
         {{/each}}
@@ -82,6 +83,17 @@ App.AdminProductForm = Em.View.extend
       <div {{bind-attr class=":form-group view.content.validationErrors.price.messages:has-error"}}>
         <label class="col-sm-2 control-label">Price</label>
         <div class="col-sm-10">{{input valueBinding="view.content.price" class="form-control" placeholder="Price"}}</div>
+      </div>
+       <div {{bind-attr class=":form-group view.content.validationErrors.category_id.messages:has-error"}}>
+        <label class="col-sm-2 control-label">Category</label>
+        <div class="col-sm-10">
+          {{view Ember.Select
+            contentBinding='App.store.categories'
+            valueBinding='view.content.category_id'
+            optionValuePath='content.id'
+            optionLabelPath='content.name'
+            class="form-control"}}
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Image</label>

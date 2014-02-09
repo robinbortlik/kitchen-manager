@@ -4,7 +4,7 @@ class Application < Sinatra::Base
   get '/products' do
     response.headers['Cache-Control'] = 'no-cache'
     content_type :json
-    Product.all.to_json
+    Product.all.sort_alphabetical_by(&:name).to_json
   end
 
   post '/products' do

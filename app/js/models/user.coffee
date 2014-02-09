@@ -2,18 +2,19 @@ App.User = Ember.Resource.define
   url: '/users'
   schema:
     id:    Number
-    name:  String
+    first_name: String
+    last_name: String
     image:  String
     deleted:  Boolean
 
 App.User.reopen Ember.Validations,
   validations:
-    name:
+    first_name:
       presence: true
 
-  firstLetter:(->
-    name_array = (@get("name") || "").split(" ")
-    (name_array[name_array.length - 1]).charAt(0).toUpperCase()
-  ).property("name")
+    last_name:
+      presence: true
 
+
+  name: (-> "#{@get('first_name')} #{@get('last_name')}").property("first_name", "last_name")
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")

@@ -1,14 +1,14 @@
-App.AdminUsersView = Em.View.extend
+App.AdminCategoriesView = Em.View.extend
   layout: App.AdminLayoutView.template
   actions:
     openForm: (model) ->
-      view = App.AdminUserForm.create()
-      user = App.User.create()
-      view.set 'content', user
+      view = App.AdminCategoryForm.create()
+      category = App.Category.create()
+      view.set 'content', category
       view.appendTo("#ember-app")
 
   template: Em.Handlebars.compile """
-    <h1>Users</h1>
+    <h1>Categories</h1>
     <p>
       <button type="button" class="btn btn-primary" {{action 'openForm' target='view'}}>
         <span class="glyphicon glyphicon-plus"></span> New
@@ -21,7 +21,7 @@ App.AdminUsersView = Em.View.extend
           <tr {{bind-attr class="deleted:danger"}}>
             <td>{{id}}</td>
             <td>{{name}}</td>
-            <td>{{view App.AdminUserActionButtons contentBinding="this"}}</td>
+            <td>{{view App.AdminCategoryActionButtons contentBinding="this"}}</td>
           </tr>
         {{/each}}
       </tbody>
@@ -29,20 +29,18 @@ App.AdminUsersView = Em.View.extend
   """
 
 
-App.AdminUserActionButtons = Em.View.extend
+App.AdminCategoryActionButtons = Em.View.extend
   actions:
     openForm: (model) ->
-      view = App.AdminUserForm.create()
+      view = App.AdminCategoryForm.create()
       view.set 'content', @get("content")
       view.appendTo("#ember-app")
 
     destroyResource: ->
-      @set("content.deleted", true)
-      @get("content").save()
+      if confirm('Are you sure')
+        @get("content").destroyResource().done =>
+          App.get('store.categories').removeObject(@get("content"))
 
-    activateResource: ->
-      @set("content.deleted", false)
-      @get("content").save()
 
   template: Em.Handlebars.compile """
     {{#if deleted}}
@@ -53,17 +51,18 @@ App.AdminUserActionButtons = Em.View.extend
     {{/if}}
   """
 
-App.AdminUserForm = Em.View.extend
+App.AdminCategoryForm = Em.View.extend
   layout: App.ModalLayoutView.template
   contextBinding: 'content'
-  title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
+  title: (-> if @get("content.isNew") then 'Create Category' else 'Edit Category' ).property('content')
+
   actions:
     save: ->
       if @get("content").validate()
         isNew = @get("content.isNew")
         @get("content").save().done =>
           @destroy()
-          App.get("store.users").pushObject(@get("content")) if isNew
+          App.get("store.categories").pushObject(@get("content")) if isNew
 
     cancel: ->
       unless @get("content.isNew")
@@ -73,17 +72,9 @@ App.AdminUserForm = Em.View.extend
 
   template: Em.Handlebars.compile """
     <form class="form-horizontal">
-      <div {{bind-attr class=":form-group view.content.validationErrors.first_name.messages:has-error"}}>
-        <label class="col-sm-2 control-label">First Name</label>
-        <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="First Name"}}</div>
-      </div>
-      <div {{bind-attr class=":form-group view.content.validationErrors.last_name.messages:has-error"}}>
-        <label class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Last Name"}}</div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Image</label>
-        <div class="col-sm-10">{{view App.UploadInput contentBinding="view.content"}}</div>
+      <div {{bind-attr class=":form-group view.content.validationErrors.name.messages:has-error"}}>
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Name"}}</div>
       </div>
     </form>
   """

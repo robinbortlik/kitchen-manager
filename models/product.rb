@@ -5,4 +5,5 @@ class Product
   property :price, Float
   property :image, Text
   property :deleted, Boolean
+  property :category_id, Integer
 end

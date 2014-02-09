@@ -5,6 +5,7 @@ App.AdminLayoutView =
       <li>{{#link-to 'adminOverview'}}Overview{{/link-to}}</li>
       <li>{{#link-to 'adminUsers'}}Users{{/link-to}}</li>
       <li>{{#link-to 'adminProducts'}}Products{{/link-to}}</li>
+      <li>{{#link-to 'adminCategories'}}Categories{{/link-to}}</li>
     </ol>
     {{yield}}
   """
