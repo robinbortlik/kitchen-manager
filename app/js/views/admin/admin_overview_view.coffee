@@ -1,5 +1,8 @@
 App.AdminOverviewView = Em.View.extend
   layout: App.AdminLayoutView.template
+  actions:
+    export: ->
+      window.location.href = "/product_users.csv?from=#{@get('controller.fromDate')}&to=#{@get('controller.toDate')}"
 
   template: Em.Handlebars.compile """
     <h1>Overview</h1>
@@ -12,6 +15,7 @@ App.AdminOverviewView = Em.View.extend
           <label class="control-label">To
             {{view App.DatePicker valueBinding='controller.toDate'}}
           </label>
+          <button class="btn btn-success" {{action 'export' target='view'}}>Export</button>
         </div>
       </form>
     </p>
