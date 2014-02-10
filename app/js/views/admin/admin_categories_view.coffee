@@ -15,10 +15,11 @@ App.AdminCategoriesView = Em.View.extend
       </button>
     </p>
     <table class="table table-hover table-bordered">
-      <thead><th>Name</th><th></th></thead>
+      <thead><th>Position</th><th>Name</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
           <tr {{bind-attr class="deleted:danger"}}>
+            <td>{{position}}</td>
             <td>{{name}}</td>
             <td>{{view App.AdminCategoryActionButtons contentBinding="this"}}</td>
           </tr>
@@ -74,6 +75,10 @@ App.AdminCategoryForm = Em.View.extend
       <div {{bind-attr class=":form-group view.content.validationErrors.name.messages:has-error"}}>
         <label class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Name"}}</div>
+      </div>
+      <div {{bind-attr class=":form-group view.content.validationErrors.position.messages:has-error"}}>
+        <label class="col-sm-2 control-label">Position</label>
+        <div class="col-sm-10">{{input valueBinding="view.content.position" class="form-control" placeholder="Position (number)"}}</div>
       </div>
     </form>
   """

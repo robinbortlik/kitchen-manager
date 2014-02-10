@@ -5,6 +5,9 @@ window.App = Ember.Application.create(
   currentUser: null
   cart: null
   store: null
+  initialize: (container, application) ->
+    Ember.SimpleAuth.setup(application)
+
 
   addToBasket: (item) -> @get("cart.content").pushObject(item)
 

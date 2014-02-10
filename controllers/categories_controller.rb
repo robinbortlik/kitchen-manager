@@ -3,7 +3,7 @@ class Application < Sinatra::Base
   get '/categories' do
     response.headers['Cache-Control'] = 'no-cache'
     content_type :json
-    Category.all.sort_alphabetical_by(&:name).to_json
+    Category.all(:order => :position.asc ).to_json
   end
 
   post '/categories' do

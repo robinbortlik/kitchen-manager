@@ -13,8 +13,10 @@ App.ProductsView = Em.View.extend(
         @get("controller.activeProducts")
   ).property('content', 'selectedCategoryId')
 
+  chunkedProducts:(-> @get("filteredProducts").chunk(4)).property("filteredProducts")
+
   template: Em.Handlebars.compile """
-    <div class="col-md-9">
+    <div class="col-xs-9">
       <ul class="nav nav-tabs">
         {{#each App.store.categories}}
           <li><a {{action 'filter' this target='view'}} data-category-id="{{unbound id}}" data-toggle="tab">{{unbound name}}</a></li>
@@ -22,9 +24,14 @@ App.ProductsView = Em.View.extend(
       </ul>
 
       <div class="tab-content">
-        <br/>
-        {{#each view.filteredProducts}}
-          {{view App.ProductView contentBinding="this"}}
+        <br/ >
+        {{#each products in view.chunkedProducts}}
+          <div class="row">
+            {{#each products}}
+              {{view App.ProductView contentBinding="this"}}
+            {{/each}}
+          <br/>
+          </div>
         {{/each}}
       </div>
     </div>

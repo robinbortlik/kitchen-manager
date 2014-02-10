@@ -1,9 +1,8 @@
 App.UsersController = Ember.Controller.extend(
   selectedLetters: Em.ArrayProxy.create(content: [])
   contentBinding: 'App.store.users'
-  activeUsers: (->
-    @get("content").filter (i) -> not i.get("deleted")
-  ).property("content.@each.deleted")
+  activeUsers: (-> @get("content").filter (i) -> not i.get("deleted") ).property("content.@each.deleted")
+  chunkedUsers: (-> @get("selectedUsers").chunk(4) ).property("selectedUsers")
 
   selectedLettersLabel: (-> @get('selectedLetters.content').join("")).property('selectedLetters.@each')
   selectedUsers: (->

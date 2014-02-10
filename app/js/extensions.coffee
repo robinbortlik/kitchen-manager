@@ -3,6 +3,14 @@ Array::sum = (prop) ->
     x + Em.get(y, prop)
   , 0
 
+Array::chunk = (chunkSize) ->
+  R = []
+  i = 0
+
+  while i < @length
+    R.push @slice(i, i + chunkSize)
+    i += chunkSize
+  R
 
 String::removeDiacritics = ->
   str = @.toString()

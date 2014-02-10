@@ -1,4 +1,4 @@
-App.AdminProductsRoute = Ember.Route.extend(
+App.AdminProductsRoute = Ember.Route.extend(SimpleAuth,
   setupController: (controller, model) ->
     App.get('store.productsCollection').expire()
     Em.run.next =>

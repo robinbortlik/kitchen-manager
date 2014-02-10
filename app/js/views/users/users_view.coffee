@@ -35,12 +35,14 @@ App.UsersView = Em.View.extend(
       <hr/>
     </div>
 
-    {{#if controller.selectedUsers}}
-      <div class="row">
-        {{#each controller.selectedUsers}}
-          {{view App.UserView contentBinding="this" controllerBinding="view.controller"}}
-        {{/each}}
-      </div>
+    {{#if controller.chunkedUsers}}
+      {{#each users in controller.chunkedUsers}}
+        <div class="row">
+          {{#each users}}
+            {{view App.UserView contentBinding="this" controllerBinding="view.controller"}}
+          {{/each}}
+        </div>
+      {{/each}}
     {{else}}
       <h1>There is not user with name including {{controller.selectedLettersLabel}}</h1>
     {{/if}}

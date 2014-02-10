@@ -24,7 +24,7 @@ App.CartView = Em.View.extend(
       view.appendTo("#ember-app")
 
   template: Em.Handlebars.compile """
-    <div class="col-md-3"">
+    <div class="col-xs-3"">
       <p>
         <button type="button" class="btn btn-danger" {{action "cancel" target="view"}}>Cancel</button>
         <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
@@ -35,6 +35,7 @@ App.CartView = Em.View.extend(
           {{#if view.content}}
             {{#each view.content}}
               {{view App.CartItemView contentBinding="this"}}
+              <br />
             {{/each}}
           {{else}}
             Start by selecting some product
@@ -46,7 +47,7 @@ App.CartView = Em.View.extend(
 )
 
 App.CartItemView = Em.View.extend(
-  classNames: ["col-lg-9"]
+  classNames: ["row"]
   template: Em.Handlebars.compile """
     {{#if view.content.image}}
       <img class="img-circle" alt="140x140" style="width: 60px; height: 60px;" {{bind-attr src="view.content.image"}}>
