@@ -18,3 +18,7 @@ App.User.reopen Ember.Validations,
 
   name: (-> "#{@get('last_name')} #{@get('first_name')}").property("first_name", "last_name")
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")
+  visible: (->
+    return true if App.get('selectedLetters.content').length == 0
+    @get("mergedName").match(App.get('selectedLetters.content').join(""))
+  ).property('App.selectedLetters.@each')

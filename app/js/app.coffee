@@ -5,6 +5,7 @@ window.App = Ember.Application.create(
   currentUser: null
   cart: null
   store: null
+  selectedLetters: Em.ArrayProxy.create(content: [])
   initialize: (container, application) ->
     Ember.SimpleAuth.setup(application)
 

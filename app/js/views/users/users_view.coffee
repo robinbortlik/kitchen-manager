@@ -1,6 +1,6 @@
 App.UsersView = Em.View.extend(
   actions:
-    cancel: -> @set("controller.selectedLetters.content", [])
+    cancel: -> App.set("selectedLetters.content", [])
 
   keyPress: ->
     alert('a')
@@ -10,9 +10,9 @@ App.UsersView = Em.View.extend(
     $(document).on 'keydown', (e) =>
       return false if (e.keyCode < 65 || e.keyCode > 90) && e.keyCode != 8
       if e.keyCode == 8
-        @get("controller.selectedLetters.content").popObject()
+        App.get("selectedLetters.content").popObject()
       else
-        @get("controller.selectedLetters.content").pushObject(String.fromCharCode(e.keyCode))
+        App.get("selectedLetters.content").pushObject(String.fromCharCode(e.keyCode))
       e.preventDefault()
       e.stopPropagation()
 
@@ -24,7 +24,7 @@ App.UsersView = Em.View.extend(
       {{#each controller.letters}}
         {{view App.LetterUsersView contentBinding="this"}}
       {{/each}}
-      {{#if controller.selectedLetters }}
+      {{#if App.selectedLetters }}
         <p class="text-center">
           <small>You are searching for: {{controller.selectedLettersLabel}}</small>
           <span class="btn btn-danger btn-xs" {{action "cancel" target="view"}}>

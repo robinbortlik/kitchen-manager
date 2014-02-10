@@ -1,21 +1,18 @@
 App.UsersController = Ember.Controller.extend(
-  selectedLetters: Em.ArrayProxy.create(content: [])
+  # selectedLetters: Em.ArrayProxy.create(content: [])
   contentBinding: 'App.store.users'
   activeUsers: (-> @get("content").filter (i) -> not i.get("deleted") ).property("content.@each.deleted")
   chunkedUsers: (-> @get("selectedUsers").chunk(4) ).property("selectedUsers")
 
-  selectedLettersLabel: (-> @get('selectedLetters.content').join("")).property('selectedLetters.@each')
+  selectedLettersLabel: (-> App.get('selectedLetters.content').join("")).property('App.selectedLetters.@each')
   selectedUsers: (->
-    return @get('activeUsers') if Em.isEmpty(@get('selectedLetters.content'))
-    tmp = @get('activeUsers').filter (u) =>
-      u.get("mergedName").match(@get('selectedLetters.content').join(""))
-    tmp
-  ).property("activeUsers.@each", "selectedLetters.content.@each")
+    @get("activeUsers").filterBy("visible")
+  ).property("activeUsers.@each.visible")
 
   availableLetters: (->
-    return @get("letters") if Em.isEmpty(@get('selectedLetters.content'))
+    return @get("letters") if Em.isEmpty(App.get('selectedLetters.content'))
     tmp = []
-    letters = @get('selectedLetters.content').join("")
+    letters = App.get('selectedLetters.content').join("")
     @get("selectedUsers").forEach (u) =>
       indexes = @lettersLocations letters, u.get("mergedName")
       for i in indexes

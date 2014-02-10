@@ -7,7 +7,7 @@ App.LetterUsersView = Em.View.extend(
 
   click: ->
     if @get('active')
-      @get("controller.selectedLetters.content").pushObject(@get("content"))
+      App.get("selectedLetters.content").pushObject(@get("content"))
 
 
   template: Em.Handlebars.compile """{{view.content}}"""

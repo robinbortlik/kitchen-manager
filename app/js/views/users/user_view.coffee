@@ -1,5 +1,5 @@
 App.UserView = Em.View.extend(
-  classNames: ["col-xs-3"]
+  classNameBindings: [":col-xs-3", "content.visible::hidden"]
   click: -> @get('controller').transitionToRoute "order", {id: @get("content.id")}
 
   template: Em.Handlebars.compile """
