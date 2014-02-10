@@ -15,11 +15,10 @@ App.AdminProductsView = Em.View.extend
       </button>
     </p>
     <table class="table table-hover table-bordered">
-      <thead><th>Id</th><th>Name</th><th>Price</th><th>Category</th><th></th></thead>
+      <thead><th>Name</th><th>Price</th><th>Category</th><th></th></thead>
       <tbody>
         {{#each view.controller.content}}
           <tr {{bind-attr class="deleted:danger"}}>
-            <td>{{id}}</td>
             <td>{{name}}</td>
             <td>{{price}}</td>
             <td>{{category.name}}</td>
