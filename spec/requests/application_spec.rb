@@ -4,6 +4,7 @@ describe Application do
 
   let(:user) {FactoryGirl.create(:user)}
   let(:product) {FactoryGirl.create(:product, price: 2)}
+  let(:category) {Category.first || FactoryGirl.create(:category)}
   let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 30)}
 
   before(:each) do
@@ -24,6 +25,7 @@ describe Application do
   it 'order food', :request => true, :js =>true do
     visit '/'
     page.find("h4", text: user.name).click
+    page.find("a", text: category.name).click
     page.find("h4", text: product.name).click
     page.find("h4", text: product.name).click
     expect(page).to have_content("2x (4.00 Kč)")
@@ -35,6 +37,7 @@ describe Application do
   it 'remove food from order', :request => true, :js =>true do
     visit '/'
     page.find("h4", text: user.name).click
+    page.find("a", text: category.name).click
     page.find("h4", text: product.name).click
     page.find("h4", text: product.name).click
     within ".panel" do

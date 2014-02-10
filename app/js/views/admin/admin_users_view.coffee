@@ -75,11 +75,11 @@ App.AdminUserForm = Em.View.extend
     <form class="form-horizontal">
       <div {{bind-attr class=":form-group view.content.validationErrors.first_name.messages:has-error"}}>
         <label class="col-sm-2 control-label">First Name</label>
-        <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="First Name"}}</div>
+        <div class="col-sm-10">{{input valueBinding="view.content.first_name" class="form-control" placeholder="First Name"}}</div>
       </div>
       <div {{bind-attr class=":form-group view.content.validationErrors.last_name.messages:has-error"}}>
         <label class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Last Name"}}</div>
+        <div class="col-sm-10">{{input valueBinding="view.content.last_name" class="form-control" placeholder="Last Name"}}</div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Image</label>

@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    name "Alex"
+    first_name "Alex"
+    last_name "Zavadsky"
   end
 end

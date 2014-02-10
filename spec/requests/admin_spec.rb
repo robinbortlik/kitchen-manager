@@ -4,6 +4,7 @@ describe "Admin" do
 
   let(:user) {FactoryGirl.create(:user)}
   let(:product) {FactoryGirl.create(:product, price: 2)}
+  let(:category) {Category.first || FactoryGirl.create(:category)}
   let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 15, is_paid: false, created_at: Date.today)}
 
   describe "overview" do
@@ -58,7 +59,8 @@ describe "Admin" do
       click_on "Users"
       page.find("button", text: "New").click
       expect(page).to have_selector(".modal-content")
-      page.find(:css, "input[placeholder='Name']").set "Robin"
+      page.find(:css, "input[placeholder='First Name']").set "Robin"
+      page.find(:css, "input[placeholder='Last Name']").set "Bortlik"
       expect{click_on "Save"; sleep(1)}.to change{User.count}.by(1)
       within "table" do
         expect(page).to have_content "Robin"
@@ -69,11 +71,12 @@ describe "Admin" do
       user
       visit '/admin'
       click_on "Users"
-      expect(page).to have_content "Alex"
+      expect(page).to have_content "Alex Zavadsky"
       page.find(:css, "span.glyphicon-pencil").click
       expect(page).to have_selector(".modal-content")
-      page.find(:css, "input[placeholder='Name']").set "new Robin"
-      expect{click_on "Save"; sleep(1)}.to change{User.last.name}.from("Alex").to("new Robin")
+      page.find(:css, "input[placeholder='First Name']").set "new Robin"
+      page.find(:css, "input[placeholder='Last Name']").set "Bortlik"
+      expect{click_on "Save"; sleep(1)}.to change{User.last.name}.from("Alex Zavadsky").to("new Robin Bortlik")
       within "table" do
         expect(page).to have_content "new Robin"
       end
@@ -106,6 +109,7 @@ describe "Admin" do
       expect(page).to have_selector(".modal-content")
       page.find(:css, "input[placeholder='Name']").set "Product 1"
       page.find(:css, "input[placeholder='Price']").set "10"
+      page.find(:css, "select").set category.id
       expect{click_on "Save"; sleep(1)}.to change{Product.count}.by(1)
       within "table" do
         expect(page).to have_content "Product 1"
@@ -121,6 +125,7 @@ describe "Admin" do
       page.find(:css, "span.glyphicon-pencil").click
       expect(page).to have_selector(".modal-content")
       page.find(:css, "input[placeholder='Name']").set "new Apple"
+      page.find(:css, "select").set category.id
       expect{click_on "Save"; sleep(1)}.to change{Product.last.name}.from("Banana").to("new Apple")
       within "table" do
         expect(page).to have_content "new Apple"
