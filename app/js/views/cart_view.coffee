@@ -1,5 +1,6 @@
 App.CartView = Em.View.extend(
   totalPrice:(-> App.get('cart.totalPrice') ).property('App.cart.totalPrice')
+  year: (-> moment().get('year') ).property()
   actions:
     cancel: -> @get('controller').transitionToRoute "users"
 
@@ -30,7 +31,7 @@ App.CartView = Em.View.extend(
         <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
       </p>
       <div class="panel panel-default">
-        <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> <a {{action "openUserOverview" target="view"}}>Overview</a></div>
+        <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> {{#link-to 'order.yearOverview' App.currentUser.id view.year}}Overview{{/link-to}}</div>
         <div class="panel-body">
           {{#if view.content}}
             {{#each view.content}}

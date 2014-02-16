@@ -1,53 +1,29 @@
-App.OrderView = Em.View.extend(
-  template: Em.Handlebars.compile """
-    <h1>So {{App.currentUser.name}}, what will be your oder?</h1>
-    <div class="row">
-      {{view App.ProductsView contentBinding='controller.content'}}
-      {{view App.CartView contentBinding='controller.cart.calculatedContent'}}
-    </div>
-  """
-)
-
-App.OrderUserOverviewView = Em.View.extend(
-  title: "Overview"
-  layout: App.LargeModalLayoutView.template
-  year: (-> moment().get('year') ).property()
+App.OrderYearOverviewView = Em.View.extend(
   months: (-> moment.months() ).property()
-  actions:
-    cancel: -> @destroy()
-
+  classNameBindings: [":container"]
   template: Em.Handlebars.compile """
+    <h1>
+      {{App.currentUser.name}}'s overview for year {{view.controller.year}}
+      {{#link-to 'order' App.currentUser.id class="btn btn-danger pull-right"}}Back{{/link-to}}
+    </h1>
     <table class="table table-striped  table-hover table-bordered">
       <thead>
         <th>Month</th>
         {{#each App.store.products}}
-          {{view App.UserOverviewColumnHeaderView contentBinding="this"}}
+          {{view App.YearOverviewColumnHeaderView contentBinding="this"}}
         {{/each}}
         <th>Sum</th>
       </thead>
       <tbody>
         {{#each view.months}}
-          {{view App.UserOverviewRowView monthBinding="this"}}
+          {{view App.YearOverviewRowView monthBinding="this"}}
         {{/each}}
       </tbody>
     </table>
   """
-
-  didInsertElement: ->
-    @loadData()
-
-  loadData: ->
-    ajax = $.ajax
-      url: '/product_users/user_overview'
-      data:
-        user_id: App.get('currentUser.id')
-        year: @get("year")
-
-    ajax.done (response) =>
-      App.set 'store.currentUserProducts', response
 )
 
-App.UserOverviewColumnHeaderView = Em.View.extend
+App.YearOverviewColumnHeaderView = Em.View.extend
   tagName: 'th'
   prices: (->
     @get('content.price')
@@ -59,11 +35,12 @@ App.UserOverviewColumnHeaderView = Em.View.extend
     {{formatMoney view.prices}}
   """
 
-App.UserOverviewRowView = Em.View.extend
+App.YearOverviewRowView = Em.View.extend
   tagName: 'tr'
   classNameBindings: ["isCurrentMonth:green"]
 
   monthIndex: (-> moment.months().indexOf(@get("month"))).property("content")
+  monthNumber: (-> @get('monthIndex') + 1).property("monthIndex")
   isCurrentMonth: (-> @get("monthIndex") == moment().get("month") ).property("monthIndex")
   monthProducts: (->
     Em.makeArray(App.get('store.currentUserProducts')).filter (userProduct) =>
@@ -100,7 +77,7 @@ App.UserOverviewRowView = Em.View.extend
     , 500
 
   template: Em.Handlebars.compile """
-    <td>{{view.month}}</td>
+    <td>{{#link-to 'order.monthOverview' App.currentUser.id view.controller.year view.monthNumber}} {{view.month}}{{/link-to}}</td>
     {{#each view.productsPerMonth}}
       <td>{{this}}</td>
     {{/each}}
