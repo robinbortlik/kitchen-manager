@@ -6,6 +6,10 @@ class Application < Sinatra::Base
     erb :index
   end
 
+  get '/health-check' do
+    "OK"
+  end
+
   assets do
     js :app, ['/js/store.js', '/js/app.js', '/js/**/*.js']
     css :app, ['/css/*.css']
