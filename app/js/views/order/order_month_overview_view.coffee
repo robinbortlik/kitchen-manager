@@ -23,10 +23,10 @@ App.RowOrderMonthOverviewView = Em.View.extend(
   ).property('controller.monthProducts')
 
   template: Em.Handlebars.compile """
-    <td>{{view.content}}</td>
+    <td>{{unbound view.content}}</td>
     <td>
       {{#each view.orderedProducts}}
-        <span class="pill">{{name}} {{formatMoney price}}</span>
+        <span class="pill">{{unbound name}} {{formatMoney price}}</span>
       {{/each}}
     </td>
   """

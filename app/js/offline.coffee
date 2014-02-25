@@ -24,7 +24,7 @@ window.OfflineMessage = Em.Object.create
 
 window.Offline =
   check: ->
-    setInterval Offline.ajax, 5000
+    setInterval Offline.ajax, 10000
 
   ajax: ->
     jQuery.ajax
