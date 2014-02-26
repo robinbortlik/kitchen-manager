@@ -36,7 +36,7 @@
 tr.green td, td.green
   background-color: #dff0d8 !important
 
-.userPhoto , .cartItemPhoto
+.userPhoto, .cartItemPhoto
   width: 100px
   height: 100px
   text-align: center
@@ -45,9 +45,17 @@ tr.green td, td.green
   background-repeat: no-repeat !important
   background-position: 0 !important
 
-.userPhoto img, .cartItemPhoto img
-  width: 100%
+.userPhoto 
   border-radius: 10%
+  margin: 0px auto
+  cursor: pointer
+  box-shadow: 0 0 10px rgba(0,0,0,0.2)
+
+.row > div > h5, .row > div > h4
+  text-align: center
+  font-weight: bold
+  padding: 0 0 20px
+  cursor: pointer
 
 i.glyphicon, span.glyphicon
   display: inline-block
