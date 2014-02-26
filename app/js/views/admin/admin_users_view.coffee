@@ -84,15 +84,13 @@ App.AdminUserForm = Em.View.extend
         <label class="col-sm-2 control-label">Image</label>
         <div class="col-sm-10">{{view App.UploadInput contentBinding="view.content"}}</div>
       </div>
-      {{#if view.content.image}}
-        <div class="form-group">
-          <label class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <div class="userPhoto">
-              <img {{bind-attr src="view.content.image"}}>
-            </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <div class="userPhoto">
+            <img {{bind-attr src="view.content.imageSource"}}>
           </div>
         </div>
-      {{/if}}
+      </div>
     </form>
   """

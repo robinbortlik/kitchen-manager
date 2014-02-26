@@ -26,6 +26,9 @@
   100%
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
 
+.panel-body .row
+  padding-left: 0
+  margin-left: 0
 
 .modal-dialog.large
   width: 80%
@@ -36,12 +39,13 @@ tr.green td, td.green
 .userPhoto , .cartItemPhoto
   width: 100px
   height: 100px
-  border-radius: 50%
+  border-radius: 10%
   text-align: center
   overflow: hidden
 
 .userPhoto img, .cartItemPhoto img
   width: 100%
+  border-radius: 10%
 
 i.glyphicon, span.glyphicon
   display: inline-block
@@ -57,6 +61,7 @@ div.letter
   text-align: center
   margin-top: 5px
   border: 1px dotted #aaa
+  border-radius: 10%
 
 
 div.letter.active

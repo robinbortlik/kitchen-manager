@@ -51,7 +51,7 @@ App.CartItemView = Em.View.extend(
   classNames: ["row"]
   template: Em.Handlebars.compile """
     <div class="cartItemPhoto">
-      <img {{bind-attr src="view.content.image"}}/>
+      <img {{bind-attr src="view.content.imageSource"}}/>
     </div>
     {{view.content.name}}
     <div>{{view.content.count}}x ({{formatMoney view.content.total}})</div>

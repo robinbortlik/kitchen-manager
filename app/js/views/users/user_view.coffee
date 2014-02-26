@@ -4,7 +4,7 @@ App.UserView = Em.View.extend(
 
   template: Em.Handlebars.compile """
     <div class="userPhoto">
-      <img {{bind-attr src="view.content.image"}} />
+      <img {{bind-attr src="view.content.imageSource"}} />
     </div>
     <h5>{{unbound view.content.name}}</h5>
   """
