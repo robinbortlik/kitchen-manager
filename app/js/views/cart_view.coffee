@@ -50,11 +50,9 @@ App.CartView = Em.View.extend(
 App.CartItemView = Em.View.extend(
   classNames: ["row"]
   template: Em.Handlebars.compile """
-    {{#if view.content.image}}
-      <img class="img-circle" alt="140x140" style="width: 60px; height: 60px;" {{bind-attr src="view.content.image"}}>
-    {{else}}
-      <img class="img-circle" style="width: 60px; height: 60px; background-color: #EEE"/>
-    {{/if}}
+    <div class="cartItemPhoto">
+      <img {{bind-attr src="view.content.image"}}/>
+    </div>
     {{view.content.name}}
     <div>{{view.content.count}}x ({{formatMoney view.content.total}})</div>
   """
