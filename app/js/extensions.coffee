@@ -12,6 +12,7 @@ Array::chunk = (chunkSize) ->
     i += chunkSize
   R
 
+
 String::removeDiacritics = ->
   str = @.toString()
   defaultDiacriticsRemovalMap = [

@@ -1,10 +1,10 @@
 App.AdminOverviewView = Em.View.extend
+  template: Em.TEMPLATES['admin/overview/index']
   layout: Em.TEMPLATES['admin/layouts/admin_layout']
   actions:
     export: ->
       window.location.href = "/product_users.csv?from=#{@get('controller.fromDate')}&to=#{@get('controller.toDate')}"
 
-  template: Em.TEMPLATES['admin/overview/index']
 
 App.AdminOverviewRowView = Em.View.extend
   template: Em.TEMPLATES['admin/overview/row']

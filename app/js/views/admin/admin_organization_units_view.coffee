@@ -1,19 +1,19 @@
-App.AdminCategoriesView = Em.View.extend
-  template: Em.TEMPLATES['admin/categories/index']
+App.AdminOrganizationUnitsView = Em.View.extend
+  template: Em.TEMPLATES['admin/organization_units/index']
   layout: Em.TEMPLATES['admin/layouts/admin_layout']
   actions:
     openForm: (model) ->
-      view = App.AdminCategoryForm.create()
-      category = App.Category.create()
+      view = App.AdminOrganizationUnitForm.create()
+      category = App.OrganizationUnit.create()
       view.set 'content', category
       view.appendTo("#ember-app")
 
 
-App.AdminCategoryForm = Em.View.extend
-  template: Em.TEMPLATES['admin/categories/form']
+App.AdminOrganizationUnitForm = Em.View.extend
+  template: Em.TEMPLATES['admin/organization_units/form']
   layout: Em.TEMPLATES['admin/layouts/modal_layout']
   contextBinding: 'content'
-  title: (-> if @get("content.isNew") then 'Create Category' else 'Edit Category' ).property('content')
+  title: (-> if @get("content.isNew") then 'Create Organization Unit' else 'Edit Organization Unit' ).property('content')
 
   actions:
     save: ->
@@ -21,7 +21,7 @@ App.AdminCategoryForm = Em.View.extend
         isNew = @get("content.isNew")
         @get("content").save().done =>
           @destroy()
-          App.get("store.categories").pushObject(@get("content")) if isNew
+          App.get("store.organizationUnits").pushObject(@get("content")) if isNew
 
     cancel: ->
       unless @get("content.isNew")

@@ -6,4 +6,5 @@ class User
   property :last_name,  String
   property :image, Text
   property :deleted, Boolean
+  property :organization_unit_id, Integer
 end

@@ -1,4 +1,5 @@
-App.ProductsView = Em.View.extend(
+App.ProductsView = Em.View.extend
+  template: Em.TEMPLATES['products/list']
   contentBinding: 'controller.activeProducts'
   actions:
     filter: (category) -> @set "selectedCategoryId", category.get("id")
@@ -15,8 +16,5 @@ App.ProductsView = Em.View.extend(
 
   chunkedProducts:(-> @get("filteredProducts").chunk(4)).property("filteredProducts")
 
-  template: Em.TEMPLATES['products/list']
-
   didInsertElement: ->
     $(".nav-tabs li:first").addClass("active")
-)

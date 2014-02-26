@@ -1,4 +1,5 @@
 App.AdminUsersView = Em.View.extend
+  template: Em.TEMPLATES['admin/users/index']
   layout: Em.TEMPLATES['admin/layouts/admin_layout']
   actions:
     openForm: (model) ->
@@ -7,27 +8,9 @@ App.AdminUsersView = Em.View.extend
       view.set 'content', user
       view.appendTo("#ember-app")
 
-  template: Em.TEMPLATES['admin/users/index']
-
-
-App.AdminUserActionButtons = Em.View.extend
-  actions:
-    openForm: (model) ->
-      view = App.AdminUserForm.create()
-      view.set 'content', @get("content")
-      view.appendTo("#ember-app")
-
-    destroyResource: ->
-      @set("content.deleted", true)
-      @get("content").save()
-
-    activateResource: ->
-      @set("content.deleted", false)
-      @get("content").save()
-
-  template: Em.TEMPLATES['admin/users/action_buttons']
 
 App.AdminUserForm = Em.View.extend
+  template: Em.TEMPLATES['admin/users/form']
   layout: Em.TEMPLATES['admin/layouts/modal_layout']
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
@@ -46,4 +29,3 @@ App.AdminUserForm = Em.View.extend
         @get("content").fetch()
       @destroy()
 
-  template: Em.TEMPLATES['admin/users/form']

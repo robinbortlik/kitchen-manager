@@ -1,17 +1,17 @@
-<h1>Users</h1>
+<h1>Organization Units</h1>
 <p>
   <button type="button" class="btn btn-primary" {{action 'openForm' target='view'}}>
     <span class="glyphicon glyphicon-plus"></span> New
   </button>
 </p>
 <table class="table table-hover table-bordered">
-  <thead><th>Name</th><th>Organization Unit</th><th></th></thead>
+  <thead><th>Position</th><th>Name</th><th></th></thead>
   <tbody>
     {{#each view.controller.content}}
       <tr {{bind-attr class="deleted:danger"}}>
+        <td>{{position}}</td>
         <td>{{name}}</td>
-        <td>{{organizationUnit.name}}</td>
-        <td>{{view App.AdminActionButtonsView contentBinding="this" collectionName="users" formName="User"}}</td>
+        <td>{{view App.AdminActionButtonsView contentBinding="this" collectionName="organizationUnits" formName="OrganizationUnit"}}</td>
       </tr>
     {{/each}}
   </tbody>

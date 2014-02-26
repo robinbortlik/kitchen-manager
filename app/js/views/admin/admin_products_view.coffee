@@ -1,4 +1,5 @@
 App.AdminProductsView = Em.View.extend
+  template: Em.TEMPLATES['admin/products/index']
   layout: Em.TEMPLATES['admin/layouts/admin_layout']
   actions:
     openForm: (model) ->
@@ -7,27 +8,9 @@ App.AdminProductsView = Em.View.extend
       view.set 'content', product
       view.appendTo("#ember-app")
 
-  template: Em.TEMPLATES['admin/products/index']
-
-
-App.AdminProductActionButtons = Em.View.extend
-  actions:
-    openForm: (model) ->
-      view = App.AdminProductForm.create()
-      view.set 'content', @get("content")
-      view.appendTo("#ember-app")
-
-    destroyResource: ->
-      @set("content.deleted", true)
-      @get("content").save()
-
-    activateResource: ->
-      @set("content.deleted", false)
-      @get("content").save()
-
-  template: Em.TEMPLATES['admin/products/action_buttons']
 
 App.AdminProductForm = Em.View.extend
+  template: Em.TEMPLATES['admin/products/form']
   layout: Em.TEMPLATES['admin/layouts/modal_layout']
   contextBinding: 'content'
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
@@ -46,5 +29,3 @@ App.AdminProductForm = Em.View.extend
         @get("content").expire()
         @get("content").fetch()
       @destroy()
-
-  template: Em.TEMPLATES['admin/products/form']

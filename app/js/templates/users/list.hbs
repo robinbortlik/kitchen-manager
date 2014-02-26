@@ -1,16 +1,20 @@
-<div class="row">
-  {{#each controller.letters}}
-    {{view App.LetterUsersView contentBinding="this"}}
-  {{/each}}
-  {{#if App.selectedLetters }}
-    <p class="text-center">
-      <small>You are searching for: {{controller.selectedLettersLabel}}</small>
-      <span class="btn btn-danger btn-xs" {{action "cancel" target="view"}}>
-        <i class="glyphicon glyphicon-remove"></i> Clear
-      </span>
-    </p>
-  {{/if}}
-  <hr/>
+<div class="row" id="filter">
+  <form class="form-inline">
+    <div class="input-group">
+      <div class="dropdown input-group-addon" id="organizationUnitSelect">
+        <a data-toggle="dropdown" class="btn btn-primary">{{controller.organizationUnit.name}} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          {{#each App.store.organizationUnits}}
+            <li>
+              <a {{action 'changeOrganization' this target='controller'}} data-category-id="{{unbound id}}" data-toggle="dropdown">{{unbound name}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+
+      {{input valueBinding="view.controller.filteredText" class="form-control" placeholder="Type user name"}}
+    </div>
+  </form>
 </div>
 
 {{#if controller.chunkedUsers}}
@@ -22,5 +26,5 @@
     </div>
   {{/each}}
 {{else}}
-  <h1>There is not user with name including {{controller.selectedLettersLabel}}</h1>
+  <h1>There is not user in {{controller.organizationUnit.name}} with name including {{controller.filteredText}}</h1>
 {{/if}}

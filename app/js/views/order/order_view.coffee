@@ -1,3 +1,2 @@
-App.OrderView = Em.View.extend(
+App.OrderView = Em.View.extend
   template: Em.TEMPLATES['order/index']
-)
