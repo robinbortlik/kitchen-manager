@@ -24,10 +24,10 @@ describe Application do
 
   it 'order food', :request => true, :js =>true do
     visit '/'
-    page.find("h4", text: user.name).click
+    page.find("h5", text: user.name).click
     page.find("a", text: category.name).click
-    page.find("h4", text: product.name).click
-    page.find("h4", text: product.name).click
+    page.find("h5", text: product.name).click
+    page.find("h5", text: product.name).click
     expect(page).to have_content("2x (4.00 Kč)")
 
     expect{click_on "I'm done"; sleep(1)}.to change{ProductUser.count}.by(2)
@@ -36,10 +36,10 @@ describe Application do
 
   it 'remove food from order', :request => true, :js =>true do
     visit '/'
-    page.find("h4", text: user.name).click
+    page.find("h5", text: user.name).click
     page.find("a", text: category.name).click
-    page.find("h4", text: product.name).click
-    page.find("h4", text: product.name).click
+    page.find("h5", text: product.name).click
+    page.find("h5", text: product.name).click
     within ".panel" do
       expect(page).to have_content("2x (4.00 Kč)")
       page.find("div.col-lg-9", text: product.name).click
@@ -50,7 +50,7 @@ describe Application do
   it 'display overview', :request => true, :js =>true do
     product_user
     visit '/'
-    page.find("h4", text: user.name).click
+    page.find("h5", text: user.name).click
     page.find("a", text: "Overview").click
 
     within ".modal-content" do
@@ -65,7 +65,7 @@ describe Application do
 
   it 'cancel order', :request => true, :js =>true do
     visit '/'
-    page.find("h4", text: user.name).click
+    page.find("h5", text: user.name).click
     click_on "Cancel"
     expect(current_path).to eq "/"
   end

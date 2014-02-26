@@ -56,6 +56,7 @@ App.AdminUserForm = Em.View.extend
   layout: App.ModalLayoutView.template
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
+  background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
   actions:
     save: ->
       if @get("content").validate()
@@ -87,9 +88,7 @@ App.AdminUserForm = Em.View.extend
       <div class="form-group">
         <label class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
-          <div class="userPhoto">
-            <img {{bind-attr src="view.content.imageSource"}}>
-          </div>
+          <div class="userPhoto" {{bind-attr style="view.background"}}></div>
         </div>
       </div>
     </form>

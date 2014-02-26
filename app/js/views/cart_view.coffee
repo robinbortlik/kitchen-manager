@@ -49,10 +49,9 @@ App.CartView = Em.View.extend(
 
 App.CartItemView = Em.View.extend(
   classNames: ["row"]
+  background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
   template: Em.Handlebars.compile """
-    <div class="cartItemPhoto">
-      <img {{bind-attr src="view.content.imageSource"}}/>
-    </div>
+    <div class="cartItemPhoto" {{bind-attr style="view.background"}}></div>
     {{view.content.name}}
     <div>{{view.content.count}}x ({{formatMoney view.content.total}})</div>
   """
