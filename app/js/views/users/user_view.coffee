@@ -3,7 +3,9 @@ App.UserView = Em.View.extend(
   click: -> @get('controller').transitionToRoute "order", {id: @get("content.id")}
 
   template: Em.Handlebars.compile """
-    <img class="img-circle img-responsive" {{bind-attr src="view.content.image"}}>
+    <div class="userPhoto">
+       <img {{bind-attr src="view.content.image"}} />
+    </div>
     <h5>{{unbound view.content.name}}</h5>
   """
 )

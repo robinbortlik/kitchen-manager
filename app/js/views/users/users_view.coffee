@@ -28,7 +28,7 @@ App.UsersView = Em.View.extend(
         <p class="text-center">
           <small>You are searching for: {{controller.selectedLettersLabel}}</small>
           <span class="btn btn-danger btn-xs" {{action "cancel" target="view"}}>
-            <i class="glyphicon glyphicon-remove"></i>
+            <i class="glyphicon glyphicon-remove"></i> Clear
           </span>
         </p>
       {{/if}}
