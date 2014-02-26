@@ -1,0 +1,19 @@
+<div class="col-xs-3">
+  <p>
+    <button type="button" class="btn btn-danger" {{action "cancel" target="view"}}>Cancel</button>
+    <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
+  </p>
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> {{#link-to 'order.yearOverview' App.currentUser.id view.year}}Overview{{/link-to}}</div>
+    <div class="panel-body">
+      {{#if view.content}}
+        {{#each view.content}}
+          {{view App.CartItemView contentBinding="this"}}
+          <br />
+        {{/each}}
+      {{else}}
+        Start by selecting some product
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<h1>
+  {{App.currentUser.name}}'s overview for year {{view.controller.year}}
+  {{#link-to 'order' App.currentUser.id class="btn btn-danger pull-right"}}Back{{/link-to}}
+</h1>
+<table class="table table-striped  table-hover table-bordered">
+  <thead>
+    <th>Month</th>
+    {{#each App.store.products}}
+      {{view App.YearOverviewColumnHeaderView contentBinding="this"}}
+    {{/each}}
+    <th>Sum</th>
+  </thead>
+  <tbody>
+    {{#each view.months}}
+      {{view App.YearOverviewRowView monthBinding="this"}}
+    {{/each}}
+  </tbody>
+</table>

@@ -1,4 +1,5 @@
 App.CartView = Em.View.extend(
+  template: Em.TEMPLATES['cart/list']
   totalPrice:(-> App.get('cart.totalPrice') ).property('App.cart.totalPrice')
   year: (-> moment().get('year') ).property()
   actions:
@@ -23,38 +24,11 @@ App.CartView = Em.View.extend(
     openUserOverview: ->
       view = App.OrderUserOverviewView.create()
       view.appendTo("#ember-app")
-
-  template: Em.Handlebars.compile """
-    <div class="col-xs-3"">
-      <p>
-        <button type="button" class="btn btn-danger" {{action "cancel" target="view"}}>Cancel</button>
-        <button type="button" class="btn btn-success" {{action "submit" target="view"}}>I'm done</button>
-      </p>
-      <div class="panel panel-default">
-        <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> {{#link-to 'order.yearOverview' App.currentUser.id view.year}}Overview{{/link-to}}</div>
-        <div class="panel-body">
-          {{#if view.content}}
-            {{#each view.content}}
-              {{view App.CartItemView contentBinding="this"}}
-              <br />
-            {{/each}}
-          {{else}}
-            Start by selecting some product
-          {{/if}}
-        </div>
-    </div>
-  </div>
-  """
 )
 
 App.CartItemView = Em.View.extend(
+  template: Em.TEMPLATES['cart/item']
   classNames: ["row"]
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
-  template: Em.Handlebars.compile """
-    <div class="cartItemPhoto" {{bind-attr style="view.background"}}></div>
-    {{view.content.name}}
-    <div>{{view.content.count}}x ({{formatMoney view.content.total}})</div>
-  """
-
   click: -> App.removeFromBasket(@get("content.id"))
 )

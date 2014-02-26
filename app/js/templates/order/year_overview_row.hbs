@@ -1,0 +1,16 @@
+<td>{{#link-to 'order.monthOverview' App.currentUser.id view.controller.year view.monthNumber}} {{view.month}}{{/link-to}}</td>
+{{#each view.productsPerMonth}}
+  <td>{{this}}</td>
+{{/each}}
+{{#if view.isPaid}}
+  <td><strong class="text-success">{{formatMoney view.total}}</strong></td>
+{{else}}
+  <td>
+    <strong class="text-danger">{{formatMoney view.total}}</strong>&nbsp;
+    (
+      <small data-toggle="tooltip" title="Is missing to pay">{{view.notPaid}}</small>
+      /
+      <small data-toggle="tooltip" title="Was already paid">{{view.paid}}</small>
+    )
+  </td>
+{{/if}}

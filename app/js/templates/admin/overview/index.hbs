@@ -1,0 +1,29 @@
+<h1>Overview</h1>
+<p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label class="control-label">From
+        {{view App.DatePicker valueBinding='controller.fromDate'}}
+      </label>
+      <label class="control-label">To
+        {{view App.DatePicker valueBinding='controller.toDate'}}
+      </label>
+      <button class="btn btn-success" {{action 'export' target='view'}}>Export</button>
+    </div>
+  </form>
+</p>
+<table class="table table-striped  table-hover table-bordered">
+  <thead>
+    <th>Name</th>
+    {{#each App.store.products}}
+      <th>{{name}}<br/>{{formatMoney price}}</th>
+    {{/each}}
+    <th>Sum</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {{#each App.store.users}}
+      {{view App.AdminOverviewRowView contentBinding="this"}}
+    {{/each}}
+  </tbody>
+</table>

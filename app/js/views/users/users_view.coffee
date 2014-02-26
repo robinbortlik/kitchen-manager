@@ -1,9 +1,7 @@
 App.UsersView = Em.View.extend(
+  template: Em.TEMPLATES['users/list']
   actions:
     cancel: -> App.set("selectedLetters.content", [])
-
-  keyPress: ->
-    alert('a')
 
   didInsertElement: ->
     $(document).off 'keydown'
@@ -18,33 +16,4 @@ App.UsersView = Em.View.extend(
 
   willDestroyElement: ->
     $(document).off 'keydown'
-
-  template: Em.Handlebars.compile """
-    <div class="row">
-      {{#each controller.letters}}
-        {{view App.LetterUsersView contentBinding="this"}}
-      {{/each}}
-      {{#if App.selectedLetters }}
-        <p class="text-center">
-          <small>You are searching for: {{controller.selectedLettersLabel}}</small>
-          <span class="btn btn-danger btn-xs" {{action "cancel" target="view"}}>
-            <i class="glyphicon glyphicon-remove"></i> Clear
-          </span>
-        </p>
-      {{/if}}
-      <hr/>
-    </div>
-
-    {{#if controller.chunkedUsers}}
-      {{#each users in controller.chunkedUsers}}
-        <div class="row">
-          {{#each users}}
-            {{view App.UserView contentBinding="this" controllerBinding="view.controller"}}
-          {{/each}}
-        </div>
-      {{/each}}
-    {{else}}
-      <h1>There is not user with name including {{controller.selectedLettersLabel}}</h1>
-    {{/if}}
-  """
 )

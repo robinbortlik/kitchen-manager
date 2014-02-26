@@ -10,5 +10,5 @@ App.LetterUsersView = Em.View.extend(
       App.get("selectedLetters.content").pushObject(@get("content"))
 
 
-  template: Em.Handlebars.compile """{{unbound view.content}}"""
+  template: Em.TEMPLATES['users/letter']
 )

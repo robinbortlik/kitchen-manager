@@ -1,0 +1,6 @@
+{{#if deleted}}
+  <span class="glyphicon glyphicon-refresh" {{action "activateResource" target="view"}}></span>
+{{else}}
+  <span class="glyphicon glyphicon-pencil" {{action "openForm" target="view"}}></span>
+  <span class="glyphicon glyphicon-trash" {{action "destroyResource" target="view"}}></span>
+{{/if}}

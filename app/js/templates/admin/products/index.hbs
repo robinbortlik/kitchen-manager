@@ -1,0 +1,19 @@
+<h1>Products</h1>
+<p>
+  <button type="button" class="btn btn-primary" {{action 'openForm' target='view'}}>
+    <span class="glyphicon glyphicon-plus"></span> New
+  </button>
+</p>
+<table class="table table-hover table-bordered">
+  <thead><th>Name</th><th>Price</th><th>Category</th><th></th></thead>
+  <tbody>
+    {{#each view.controller.content}}
+      <tr {{bind-attr class="deleted:danger"}}>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>{{category.name}}</td>
+        <td>{{view App.AdminProductActionButtons contentBinding="this"}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
