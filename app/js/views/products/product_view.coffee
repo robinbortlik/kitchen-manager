@@ -1,5 +1,10 @@
 App.ProductView = Em.View.extend
   template: Em.TEMPLATES['products/item']
-  click: -> App.addToBasket(@get("content"))
+  click: ->
+    @$().addClass("bounceIn animated")
+    App.addToBasket(@get("content"))
+    setTimeout =>
+      @$().removeClass("bounceIn animated")
+    , 1000
   classNames: ["col-xs-3"]
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")

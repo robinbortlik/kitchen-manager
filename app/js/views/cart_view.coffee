@@ -20,15 +20,15 @@ App.CartView = Em.View.extend(
         error: (response) ->
           App.FlashMessageView.createMessage("We are sorry but something were wrong. Try it again later.", 'danger')
       )
-
-    openUserOverview: ->
-      view = App.OrderUserOverviewView.create()
-      view.appendTo("#ember-app")
 )
 
 App.CartItemView = Em.View.extend(
   template: Em.TEMPLATES['cart/item']
   classNames: ["row"]
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
-  click: -> App.removeFromBasket(@get("content.id"))
+  click: ->
+    @$().addClass("fadeOut animated")
+    setTimeout =>
+      App.removeFromBasket(@get("content.id"))
+    , 1000
 )
