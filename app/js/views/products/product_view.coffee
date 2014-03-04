@@ -5,6 +5,6 @@ App.ProductView = Em.View.extend
     App.addToBasket(@get("content"))
     setTimeout =>
       @$().removeClass("bounceIn animated")
-    , 1000
+    , 500
   classNames: ["col-xs-3"]
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")

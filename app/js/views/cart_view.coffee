@@ -30,5 +30,5 @@ App.CartItemView = Em.View.extend(
     @$().addClass("fadeOut animated")
     setTimeout =>
       App.removeFromBasket(@get("content.id"))
-    , 1000
+    , 500
 )
