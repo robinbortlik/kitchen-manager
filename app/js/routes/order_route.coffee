@@ -3,6 +3,8 @@ App.OrderRoute = Ember.Route.extend(
     App.set "currentUser", App.get('store.usersCollection.content').findBy('id', parseInt(model.id))
     App.set("cart.content", [])
     controller.set "cart", App.get("cart")
+
+  activate: -> $(document).scrollTop(0)
 )
 
 App.OrderYearOverviewRoute = Ember.Route.extend(
@@ -18,6 +20,8 @@ App.OrderYearOverviewRoute = Ember.Route.extend(
 
     ajax.done (response) ->
       App.set 'store.currentUserProducts', response
+
+  activate: -> $(document).scrollTop(0)
 )
 
 
@@ -36,5 +40,7 @@ App.OrderMonthOverviewRoute = Ember.Route.extend(
 
       ajax.done (response) ->
         App.set 'store.currentUserProducts', response
+
+  activate: -> $(document).scrollTop(0)
 )
 
