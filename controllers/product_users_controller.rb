@@ -20,7 +20,7 @@ class Application < Sinatra::Base
   end
 
   put '/product_users/update_is_paid' do
-    content_type :jsonparams[:from]
+    content_type :json
     unless ProductUser.all(id: params[:ids]).update(is_paid: params[:is_paid])
       status 500
     end
