@@ -13,7 +13,7 @@ App.UsersController = Ember.Controller.extend(
     @get("content").filter (i) => (@get('organizationUnitId') == i.get('organization_unit_id')) && not i.get("deleted")
   ).property("content.@each.deleted", "organizationUnitId")
 
-  chunkedUsers: (-> @get("selectedUsers").chunk(5) ).property("selectedUsers")
+  chunkedUsers: (-> @get("selectedUsers").chunk(6) ).property("selectedUsers")
 
   filteredTextObserver: (->
     App.set 'filteredText', @get('filteredText').replace(" ","").removeDiacritics().toUpperCase()

@@ -14,7 +14,7 @@ App.ProductsView = Em.View.extend
         @get("controller.activeProducts")
   ).property('content', 'selectedCategoryId')
 
-  chunkedProducts:(-> @get("filteredProducts").chunk(5)).property("filteredProducts")
+  chunkedProducts:(-> @get("filteredProducts").chunk(6)).property("filteredProducts")
 
   didInsertElement: ->
     $(".nav-tabs li:first").addClass("active")
