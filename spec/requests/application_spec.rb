@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Application do
 
   let(:user) {FactoryGirl.create(:user)}
-  let(:product) {FactoryGirl.create(:product, price: 2)}
+  let(:product) {FactoryGirl.create(:product, price: 2, category_id: category.id)}
   let(:category) {Category.first || FactoryGirl.create(:category)}
   let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 30)}
 
@@ -26,8 +26,8 @@ describe Application do
     visit '/'
     page.find("h5", text: user.name).click
     page.find("a", text: category.name).click
-    page.find("h5", text: product.name).click
-    page.find("h5", text: product.name).click
+    page.find("h4", text: product.name).click
+    page.find("h4", text: product.name).click
     expect(page).to have_content("2x (4.00 Kč)")
 
     expect{click_on "I'm done"; sleep(1)}.to change{ProductUser.count}.by(2)
@@ -38,11 +38,11 @@ describe Application do
     visit '/'
     page.find("h5", text: user.name).click
     page.find("a", text: category.name).click
-    page.find("h5", text: product.name).click
-    page.find("h5", text: product.name).click
+    page.find("h4", text: product.name).click
+    page.find("h4", text: product.name).click
     within ".panel" do
       expect(page).to have_content("2x (4.00 Kč)")
-      page.find("div.col-lg-9", text: product.name).click
+      page.find("div.row", text: product.name).click
       expect(page).to have_content("1x (2.00 Kč)")
     end
   end
@@ -53,14 +53,13 @@ describe Application do
     page.find("h5", text: user.name).click
     page.find("a", text: "Overview").click
 
-    within ".modal-content" do
-      Date::MONTHNAMES.compact.each do |month|
-        expect(page).to have_content(month)
-      end
 
-      expect(page.find("th", text: product.name)).not_to be_nil
-      expect(page.find("td", text: "30.00 Kč")).not_to be_nil
+    Date::MONTHNAMES.compact.each do |month|
+      expect(page).to have_content(month)
     end
+
+    expect(page.find("th", text: product.name)).not_to be_nil
+    expect(page.find("td", text: "30.00 Kč")).not_to be_nil
   end
 
   it 'cancel order', :request => true, :js =>true do

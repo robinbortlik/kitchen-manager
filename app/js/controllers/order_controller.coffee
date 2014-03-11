@@ -3,6 +3,17 @@ App.OrderController = Em.ArrayController.extend(
   activeProducts: (->
     @get("content").filter (i) -> not i.get("deleted")
   ).property("content.@each.deleted")
+
+  actions:
+    useLastCombination: ->
+      ajax = $.ajax
+        url: "product_users/#{App.get('currentUser.id')}/last_order"
+        method: "GET"
+
+      ajax.done (response) =>
+        Em.makeArray(response).forEach (productId) ->
+          product = App.get("store.products").findProperty("id", productId)
+          App.addToBasket(product) if product
 )
 
 App.OrderYearOverviewController = Em.Controller.extend(

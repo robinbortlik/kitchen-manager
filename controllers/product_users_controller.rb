@@ -12,8 +12,15 @@ class Application < Sinatra::Base
     ProductUser.all(conditions: ["user_id = ? AND strftime('%Y', created_at) = ?", params[:user_id], params[:year]]).to_json
   end
 
-  put '/product_users/update_is_paid' do
+  get '/product_users/:id/last_order' do
+    response.headers['Cache-Control'] = 'no-cache'
     content_type :json
+    last = ProductUser.all(conditions: ["user_id = ?", params[:id]]).last
+    ProductUser.all(conditions: ["user_id = ? AND created_at = ?", params[:id], last.created_at]).map(&:product_id).to_json
+  end
+
+  put '/product_users/update_is_paid' do
+    content_type :jsonparams[:from]
     unless ProductUser.all(id: params[:ids]).update(is_paid: params[:is_paid])
       status 500
     end

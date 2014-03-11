@@ -2,10 +2,15 @@ require 'spec_helper'
 
 describe "Admin" do
 
-  let(:user) {FactoryGirl.create(:user)}
-  let(:product) {FactoryGirl.create(:product, price: 2)}
+  let(:user) {FactoryGirl.create(:user, organization_unit_id: organization_unit.id)}
+  let(:product) {FactoryGirl.create(:product, price: 2, category_id: category.id)}
   let(:category) {Category.first || FactoryGirl.create(:category)}
+  let(:organization_unit) {FactoryGirl.create(:organization_unit)}
   let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 15, is_paid: false, created_at: Date.today)}
+
+  before do
+    page.evaluate_script("window.password = 'f00d' ")
+  end
 
   describe "overview" do
 
@@ -61,7 +66,8 @@ describe "Admin" do
       expect(page).to have_selector(".modal-content")
       page.find(:css, "input[placeholder='First Name']").set "Robin"
       page.find(:css, "input[placeholder='Last Name']").set "Bortlik"
-      expect{click_on "Save"; sleep(1)}.to change{User.count}.by(1)
+      page.find(:css, "select").set organization_unit.id
+      expect{click_on "Save"; sleep(2)}.to change{User.count}.by(1)
       within "table" do
         expect(page).to have_content "Robin"
       end
