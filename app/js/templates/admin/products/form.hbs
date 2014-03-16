@@ -18,6 +18,10 @@
         class="form-control"}}
     </div>
   </div>
+  <div {{bind-attr class=":form-group view.content.validationErrors.position.messages:has-error"}}>
+    <label class="col-sm-2 control-label">Position</label>
+    <div class="col-sm-10">{{input valueBinding="view.content.position" class="form-control" placeholder="Position (number)"}}</div>
+  </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Image</label>
     <div class="col-sm-10">{{view App.UploadInput contentBinding="view.content"}}</div>

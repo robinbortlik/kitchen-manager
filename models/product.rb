@@ -6,4 +6,5 @@ class Product
   property :image, Text
   property :deleted, Boolean
   property :category_id, Integer
+  property :position, Integer
 end

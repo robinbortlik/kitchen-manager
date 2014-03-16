@@ -7,6 +7,7 @@ App.Product = Ember.Resource.define
     image:  String
     deleted:  Boolean
     category_id: Number
+    position: Number
 
 
 App.Product.reopen Ember.Validations,
@@ -20,6 +21,12 @@ App.Product.reopen Ember.Validations,
 
     category_id:
       presence: true
+
+    position:
+      presence: true
+      numericality:
+        onlyInteger: true
+        greaterThan: 0
 
 
   category: (->

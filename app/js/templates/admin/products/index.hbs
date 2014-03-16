@@ -5,13 +5,14 @@
   </button>
 </p>
 <table class="table table-hover table-bordered">
-  <thead><th>Name</th><th>Price</th><th>Category</th><th></th></thead>
+  <thead><th>Name</th><th>Price</th><th>Category</th><th>Position</th><th></th></thead>
   <tbody>
     {{#each view.controller.content}}
       <tr {{bind-attr class="deleted:danger"}}>
         <td>{{name}}</td>
         <td>{{price}}</td>
         <td>{{category.name}}</td>
+        <td>{{position}}</td>
         <td>{{view App.AdminActionButtonsView contentBinding="this" collectionName="products" formName="Product"}}</td>
       </tr>
     {{/each}}
