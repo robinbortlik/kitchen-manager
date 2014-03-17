@@ -4,3 +4,8 @@ App.UserView = Em.View.extend(
   click: -> @get('controller').transitionToRoute "order", {id: @get("content.id")}
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
 )
+
+App.SmallUserView = Em.View.extend
+  style: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
+  classNames: ["userPhoto", "userSmallPhoto"]
+  attributeBindings: ["style"]
