@@ -1,10 +1,10 @@
 <div class="col-xs-3">
-  <div>
-    <button type="button" class="btn btn-danger btn-lg" {{action "cancel" target="view"}}>Cancel</button>
-    <button type="button" class="btn btn-success btn-lg" {{action "submit" target="view"}}>Done</button>
+  <button type="button" class="btn btn-danger btn-lg" {{action "cancel" target="view"}}>Cancel</button>
+  <button type="button" class="btn btn-success btn-lg with-user-image" {{action "submit" target="view"}}>
+    Done
     {{view App.SmallUserView contentBinding="App.currentUser"}}
-    <br /><br />
-  </div>
+  </button>
+  <br/><br/>
   <div class="panel panel-default">
     <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> {{#link-to 'order.yearOverview' App.currentUser.id view.year}}Overview{{/link-to}}</div>
     <div class="panel-body">
