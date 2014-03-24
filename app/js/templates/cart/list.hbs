@@ -1,7 +1,9 @@
-<div class="col-xs-3">
-  <button type="button" class="btn btn-danger btn-lg" {{action "cancel" target="view"}}>Cancel</button>
+<div class="col-xs-3 cart">
+  <button type="button" class="btn btn-danger btn-lg" {{action "cancel" target="view"}}>
+    <i class="glyphicon glyphicon-remove"></i>
+  </button>
   <button type="button" class="btn btn-success btn-lg with-user-image" {{action "submit" target="view"}}>
-    Done
+    <i class="glyphicon glyphicon-ok"></i>
     {{view App.SmallUserView contentBinding="App.currentUser"}}
   </button>
   <br/><br/>
