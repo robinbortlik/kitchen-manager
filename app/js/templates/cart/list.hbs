@@ -1,12 +1,22 @@
 <div class="col-xs-3 cart">
-  <button type="button" class="btn btn-danger btn-lg" {{action "cancel" target="view"}}>
+  {{view App.SmallUserView contentBinding="App.currentUser"}}
+  <br />
+  <button type="button" title="Done" class="btn btn-success btn-lg btn-block" {{action "submit" target="view"}}>
+    <i class="glyphicon glyphicon-ok"></i>
+  </button>
+  <br />
+  <button type="button" title="Cancel" class="btn btn-danger btn-lg btn-block" {{action "cancel" target="view"}}>
     <i class="glyphicon glyphicon-remove"></i>
   </button>
-  <button type="button" class="btn btn-success btn-lg with-user-image" {{action "submit" target="view"}}>
-    <i class="glyphicon glyphicon-ok"></i>
-    {{view App.SmallUserView contentBinding="App.currentUser"}}
-  </button>
-  <br/><br/>
+  <br />
+
+  {{#if view.content}}
+    <button type="button" title="Favourite" class="btn btn-info btn-lg center-block" {{action "openProductGroupForm" target="view"}}>
+      <i class="glyphicon glyphicon-star"></i>
+    </button>
+    <br />
+  {{/if}}
+
   <div class="panel panel-default">
     <div class="panel-heading"><strong>{{formatMoney view.totalPrice}}</strong> {{#link-to 'order.yearOverview' App.currentUser.id view.year}}Overview{{/link-to}}</div>
     <div class="panel-body">
@@ -18,7 +28,9 @@
       {{else}}
         Start by selecting some product or
         <br/><br/>
-        <button type="button" class="btn btn-info btn-lg center-block" {{action "useLastCombination" target="controller"}}>Use last</button>
+        <button type="button" title="Use last" class="btn btn-info btn-lg center-block" {{action "useLastCombination" target="controller"}}>
+          <i class="glyphicon glyphicon-repeat"></i>
+        </button>
       {{/if}}
     </div>
   </div>

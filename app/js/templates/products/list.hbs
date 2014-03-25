@@ -3,17 +3,26 @@
     {{#each App.store.categories}}
       <li><a {{action 'filter' this target='view'}} data-category-id="{{unbound id}}" data-toggle="tab">{{unbound name}}</a></li>
     {{/each}}
+    <li><a {{action 'favourites' this target='view'}} data-toggle="tab">Favourites ({{App.currentUser.favourites.length}})</a></li>
   </ul>
 
   <div class="tab-content">
     <br/ >
-    {{#each products in view.chunkedProducts}}
+    {{#if view.displayFavourites}}
       <div class="row">
-        {{#each products}}
-          {{view App.ProductView contentBinding="this"}}
+        {{#each App.currentUser.favourites}}
+          {{view App.FavouriteView contentBinding="this"}}
         {{/each}}
-      <br/>
       </div>
-    {{/each}}
+    {{else}}
+      {{#each products in view.chunkedProducts}}
+        <div class="row">
+          {{#each products}}
+            {{view App.ProductView contentBinding="this"}}
+          {{/each}}
+        <br/>
+        </div>
+      {{/each}}
+    {{/if}}
   </div>
 </div>

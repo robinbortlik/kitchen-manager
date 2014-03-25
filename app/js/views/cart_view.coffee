@@ -20,6 +20,12 @@ App.CartView = Em.View.extend(
         error: (response) ->
           App.FlashMessageView.createMessage("We are sorry but something were wrong. Try it again later.", 'danger')
       )
+
+    openProductGroupForm: ->
+      view = App.ProductGroupForm.create()
+      product_group = App.ProductGroup.create()
+      view.set 'content', product_group
+      view.appendTo("#ember-app")
 )
 
 App.CartItemView = Em.View.extend(
@@ -32,3 +38,27 @@ App.CartItemView = Em.View.extend(
       App.removeFromBasket(@get("content.id"))
     , 500
 )
+
+
+App.ProductGroupForm = Em.View.extend
+  template: Em.TEMPLATES['product_groups/form']
+  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  contextBinding: 'content'
+  title: (-> if @get("content.isNew") then 'Create Favourite Combination' else 'Edit Favourite Combination' ).property('content')
+
+  actions:
+    save: ->
+      if @get("content").validate()
+        if isNew = @get("content.isNew")
+          @set("content.user_id", App.get("currentUser.id"))
+          @set("content.product_groups_products", App.get("cart").serializedProducts())
+        @get("content").save().done =>
+          App.get('currentUser').loadFavourites()
+          @destroy()
+
+
+    cancel: ->
+      unless @get("content.isNew")
+        @get("content").expire()
+        @get("content").fetch()
+      @destroy()

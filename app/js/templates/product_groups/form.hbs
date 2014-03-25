@@ -1,0 +1,10 @@
+<form class="form-horizontal">
+  <div {{bind-attr class=":form-group view.content.validationErrors.name.messages:has-error"}}>
+    <label class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">{{input valueBinding="view.content.name" class="form-control" placeholder="Name"}}</div>
+  </div>
+  <div {{bind-attr class=":form-group view.content.validationErrors.position.messages:has-error"}}>
+    <label class="col-sm-2 control-label">Position</label>
+    <div class="col-sm-10">{{input valueBinding="view.content.position" class="form-control" placeholder="Position (number)"}}</div>
+  </div>
+</form>

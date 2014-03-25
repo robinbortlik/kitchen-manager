@@ -19,7 +19,7 @@ App.User.reopen Ember.Validations,
     organization_unit_id:
       presence: true
 
-
+  favourites: []
   name: (-> "#{@get('last_name')} #{@get('first_name')}").property("first_name", "last_name")
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")
   imageSource: (-> @get('image') || App.get('defaultImage')).property("image")
@@ -32,3 +32,11 @@ App.User.reopen Ember.Validations,
     return true unless App.get('filteredText')
     @get("mergedName").match(App.get('filteredText'))
   ).property('App.filteredText')
+
+  loadFavourites: ->
+    ajax = $.ajax "/product_groups/#{@get('id')}"
+    ajax.done (response) =>
+      tmp = []
+      response.map (i) ->
+        tmp.push App.ProductGroup.create(i)
+      @set 'favourites', tmp

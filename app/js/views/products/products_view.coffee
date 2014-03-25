@@ -2,7 +2,12 @@ App.ProductsView = Em.View.extend
   template: Em.TEMPLATES['products/list']
   contentBinding: 'controller.activeProducts'
   actions:
-    filter: (category) -> @set "selectedCategoryId", category.get("id")
+    filter: (category) ->
+      @set 'displayFavourites', false
+      @set "selectedCategoryId", category.get("id")
+
+    favourites: ->
+      @set 'displayFavourites', true
 
   filteredProducts: (->
     if @get("selectedCategoryId")

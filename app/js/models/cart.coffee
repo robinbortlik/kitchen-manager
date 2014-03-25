@@ -18,3 +18,9 @@ App.Cart = Em.Object.extend
   totalPrice: (->
     @get('content').sum("price").toFixed(2)
   ).property('content.@each')
+
+  serializedProducts: ->
+    tmp = []
+    @get('content').forEach (i) ->
+      tmp.push {product_id: Em.get(i, 'id')}
+    tmp
