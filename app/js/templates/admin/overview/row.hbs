@@ -1,7 +1,5 @@
 <td>{{view.content.name}}</td>
-{{#each view.computedContent}}
-  <td>{{this}}</td>
-{{/each}}
+<td {{bind-attr class="view.isPaid:text-success"}}><i {{action "togglePay" target="view"}} class="glyphicon glyphicon-check"></i></td>
 {{#if view.isPaid}}
   <td class="sum"><strong class="text-success">{{formatMoney view.total}}</strong></td>
 {{else}}
@@ -14,4 +12,6 @@
     )
   </td>
 {{/if}}
-<td {{bind-attr class="view.isPaid:text-success"}}><i {{action "togglePay" target="view"}} class="glyphicon glyphicon-check"></i></td>
+{{#each view.computedContent}}
+  <td>{{this}}</td>
+{{/each}}
