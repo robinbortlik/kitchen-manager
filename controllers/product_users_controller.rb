@@ -35,7 +35,7 @@ class Application < Sinatra::Base
     "".to_json
   end
 
-  get '/product_users.csv' do
+  get '/product_users.xls' do
     content_type 'application/octet-stream'
     product_users = ProductUser.all(conditions: ["DATE(created_at) >= ? AND DATE(created_at) <= ?", params[:from], params[:to]])
     exporter = ProductUserExporter.new(product_users)

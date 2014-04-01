@@ -14,6 +14,7 @@ gem 'rack-parser', :require => 'rack/parser'
 gem 'axlsx'
 gem 'sort_alphabetical'
 gem 'sinatra-ember'
+gem 'spreadsheet'
 
 group :test do
   gem 'rspec'            # Rspec tests
