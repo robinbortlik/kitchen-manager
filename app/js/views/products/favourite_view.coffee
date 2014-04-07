@@ -1,6 +1,9 @@
 App.FavouriteView = Em.View.extend
   template: Em.TEMPLATES['products/favourite']
-  classNames: ["col-xs-2"]
+  classNames: ["col-md-3"]
   click: ->
-    App.set('cart.content', @get('content.products'))
-
+    @$().addClass("bounceIn animated")
+    App.get('cart.content').pushObjects(@get('content.products'))
+    setTimeout =>
+      @$().removeClass("bounceIn animated")
+    , 500

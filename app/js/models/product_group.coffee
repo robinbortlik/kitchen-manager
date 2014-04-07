@@ -38,5 +38,5 @@ App.ProductGroup.reopen Ember.Validations,
     tmp = []
     @get('productsIds').forEach (productId) ->
       tmp.push App.get('store.products').findProperty('id', productId)
-    tmp
+    tmp.compact()
   ).property('productsIds')
