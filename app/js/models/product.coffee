@@ -34,3 +34,7 @@ App.Product.reopen Ember.Validations,
     App.get('store.categories').findBy('id', @get('category_id'))
   ).property('category_id')
   imageSource: (-> @get('image') || App.get('defaultImage')).property("image")
+
+  destroyResource: ->
+    @set 'deleted', true
+    @save()

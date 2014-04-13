@@ -11,8 +11,9 @@ App.AdminActionButtonsView = Em.View.extend
     destroyResource: ->
       if confirm('Are you sure')
         @get("content").destroyResource().done =>
-          collection = App.get("store.#{@get('collectionName')}")
-          collection.removeObject(@get("content"))
+          unless @get("content.deleted")
+            collection = App.get("store.#{@get('collectionName')}")
+            collection.removeObject(@get("content"))
 
     activateResource: ->
       @set("content.deleted", false)

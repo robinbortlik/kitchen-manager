@@ -20,9 +20,13 @@ App.User.reopen Ember.Validations,
       presence: true
 
   favourites: []
+
   name: (-> "#{@get('last_name')} #{@get('first_name')}").property("first_name", "last_name")
+
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")
+
   imageSource: (-> @get('image') || App.get('defaultImage')).property("image")
+
   organizationUnit: (->
     return null unless @get('organization_unit_id')
     App.get('store.organizationUnits').findBy('id', @get('organization_unit_id'))
@@ -40,3 +44,7 @@ App.User.reopen Ember.Validations,
       response.map (i) ->
         tmp.push App.ProductGroup.create(i)
       @set 'favourites', tmp
+
+  destroyResource: ->
+    @set 'deleted', true
+    @save()

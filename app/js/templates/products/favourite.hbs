@@ -1,1 +1,6 @@
-<button class="btn btn-lg btn-success btn-big">{{unbound view.content.position}}. {{unbound view.content.name}}</button>
+<div class="btn-group">
+  <button {{action 'add' target='view'}} class="btn btn-lg btn-big btn-success">{{unbound view.content.position}}. {{unbound view.content.name}}</button>
+  <button {{action 'remove' target='view'}} type="button" title="Delete" class="btn btn-lg btn-big-last btn-danger">
+    <i class="glyphicon glyphicon-remove"></i>
+  </button>
+</div>

@@ -37,6 +37,6 @@ App.ProductGroup.reopen Ember.Validations,
   products: (->
     tmp = []
     @get('productsIds').forEach (productId) ->
-      tmp.push App.get('store.products').findProperty('id', productId)
+      tmp.push App.get('store.products').filter((i) -> not i.get("deleted")).findProperty('id', productId)
     tmp.compact()
   ).property('productsIds')

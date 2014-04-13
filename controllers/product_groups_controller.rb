@@ -16,8 +16,8 @@ class Application < Sinatra::Base
   delete '/product_groups/:id' do
     content_type :json
     product_group = ProductGroup.first(id: params[:id])
-    product_group.destroy
     product_group.product_groups_products.destroy
+    product_group.destroy
     product_group.to_json
   end
 end
