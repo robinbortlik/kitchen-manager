@@ -17,6 +17,7 @@
   </form>
 </div>
 
+<div id="usersList">
 {{#if controller.chunkedUsers}}
   {{#each users in controller.chunkedUsers}}
     <div class="row">
@@ -28,3 +29,4 @@
 {{else}}
   <h1>There is not user in {{controller.organizationUnit.name}} with name including {{controller.filteredText}}</h1>
 {{/if}}
+</div>
