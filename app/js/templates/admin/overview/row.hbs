@@ -12,6 +12,11 @@
     )
   </td>
 {{/if}}
-{{#each view.computedContent}}
-  <td>{{this}}</td>
-{{/each}}
+
+{{#with view as oldView}}
+  {{#group}}
+    {{#each computedContent in oldView.computedContents}}
+      <td>{{computedContent}}</td>
+    {{/each}}
+  {{/group}}
+{{/with}}

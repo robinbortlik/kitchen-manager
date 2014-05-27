@@ -11,7 +11,7 @@ App.AdminOverviewRowView = Em.View.extend
   tagName: 'tr'
   userProducts: (-> Em.makeArray(@get('controller.content')).filterProperty 'user_id', @get('content.id')).property('controller.content')
 
-  computedContent: (->
+  computedContents: (->
     tmp = []
     for product in App.get('store.products')
       tmp.push @get('userProducts').filterProperty('product_id', product.get('id')).length
