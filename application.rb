@@ -14,8 +14,18 @@ class Application < Sinatra::Base
   end
 
   assets do
+    serve '/app', from: 'app'
+    serve '/vendor/js', from: 'vendor/js'
+    serve '/vendor/css', from: 'vendor/css'
+
     js :app, ['/js/store.js', '/js/app.js', '/js/**/*.js']
     css :app, ['/css/*.css']
+    css :vendor_css, ['/vendor/css/*.css']
+    js :vendor_js, ['/vendor/js/jquery-1.10.2.js',
+      '/vendor/js/handlebars-1.3.0.js',
+      '/vendor/js/ember-1.7.0-canary.js',
+      '/vendor/js/*.js']
+    prebuild true
   end
 
   ember {
