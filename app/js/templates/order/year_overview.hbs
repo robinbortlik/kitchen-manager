@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     {{#each view.months}}
-      {{view App.YearOverviewRowView monthBinding="this"}}
+      {{view App.YearOverviewRowView contextBinding="view" monthBinding="this"}}
     {{/each}}
   </tbody>
 </table>

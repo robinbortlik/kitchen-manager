@@ -3,7 +3,7 @@ class Application < Sinatra::Base
   get '/product_users' do
     response.headers['Cache-Control'] = 'no-cache'
     content_type :json
-    ProductUser.all(conditions: ["DATE(created_at) >= ? AND DATE(created_at) <= ?", params[:from], params[:to]]).to_json
+    ProductUser.all(conditions: ["DATE(created_at) >= ? AND DATE(created_at) <= ?", params[:from], params[:to]]).to_json(exclude: :name)
   end
 
   get '/product_users/user_overview' do

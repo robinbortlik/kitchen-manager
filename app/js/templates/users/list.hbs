@@ -19,13 +19,15 @@
 
 <div id="usersList">
 {{#if controller.chunkedUsers}}
-  {{#each users in controller.chunkedUsers}}
-    <div class="row">
-      {{#each users}}
-        {{view App.UserView contentBinding="this" controllerBinding="view.controller"}}
-      {{/each}}
-    </div>
-  {{/each}}
+  {{#group}}
+    {{#each users in controller.chunkedUsers}}
+      <div class="row">
+        {{#each user in users}}
+          {{view App.UserView contentBinding="user" controllerBinding="view.controller"}}
+        {{/each}}
+      </div>
+    {{/each}}
+  {{/group}}
 {{else}}
   <h1>There is not user in {{controller.organizationUnit.name}} with name including {{controller.filteredText}}</h1>
 {{/if}}

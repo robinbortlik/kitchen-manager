@@ -15,14 +15,16 @@
         {{/each}}
       </div>
     {{else}}
+      {{#group}}
       {{#each products in view.chunkedProducts}}
         <div class="row">
-          {{#each products}}
-            {{view App.ProductView contentBinding="this"}}
+          {{#each product in products}}
+            {{view App.ProductView contentBinding="product"}}
           {{/each}}
         <br/>
         </div>
       {{/each}}
+      {{/group}}
     {{/if}}
   </div>
 </div>
