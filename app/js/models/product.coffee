@@ -5,6 +5,7 @@ App.Product = Ember.Resource.define
     name:  String
     price:  Number
     image:  String
+    image_url:  String
     deleted:  Boolean
     category_id: Number
     position: Number
@@ -33,7 +34,8 @@ App.Product.reopen Ember.Validations,
     return null unless @get('category_id')
     App.get('store.categories').findBy('id', @get('category_id'))
   ).property('category_id')
-  imageSource: (-> @get('image') || App.get('defaultImage')).property("image")
+
+  imageSource: (-> @get('image') || @get('image_url')).property("image", "image_url")
 
   destroyResource: ->
     @set 'deleted', true

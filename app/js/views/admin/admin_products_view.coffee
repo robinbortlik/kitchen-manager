@@ -22,6 +22,7 @@ App.AdminProductForm = Em.View.extend
         isNew = @get("content.isNew")
         @get("content").save().done =>
           @destroy()
+          @set("content.image", null)
           App.get("store.products").pushObject(@get("content")) if isNew
 
     cancel: ->

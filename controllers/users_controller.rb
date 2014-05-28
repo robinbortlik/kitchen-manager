@@ -11,6 +11,7 @@ class Application < Sinatra::Base
     content_type :json
     user = User.new(params.except(*EXCEPTED_PARAMS))
     user.save
+    user.save_image
     user.to_json
   end
 
@@ -24,6 +25,7 @@ class Application < Sinatra::Base
     content_type :json
     user = User.first(id: params[:id])
     user.update(params.except(*EXCEPTED_PARAMS))
+    user.save_image
     user.to_json
   end
 

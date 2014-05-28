@@ -1,4 +1,5 @@
 require 'data_mapper'
+require "base64"
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/development.db")
 
 Dir[File.dirname(__FILE__) + '/../lib/*.rb'].each {|file| require file }
@@ -10,4 +11,4 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 Spreadsheet.client_encoding = 'UTF-8'
 
-EXCEPTED_PARAMS = ["splat", "captures", "id"]
+EXCEPTED_PARAMS = ["splat", "captures", "id", "image_url"]

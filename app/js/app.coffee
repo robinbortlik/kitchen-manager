@@ -1,7 +1,6 @@
 window.App = Ember.Application.create(
   rootElement: '#ember-app'
   LOG_TRANSITIONS: false
-  defaultImage: '/images/noimage.jpg'
   currency: "Kč"
   currentUser: null
   cart: null

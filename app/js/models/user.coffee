@@ -5,6 +5,7 @@ App.User = Ember.Resource.define
     first_name: String
     last_name: String
     image:  String
+    image_url:  String
     deleted:  Boolean
     organization_unit_id: Number
 
@@ -25,7 +26,7 @@ App.User.reopen Ember.Validations,
 
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")
 
-  imageSource: (-> @get('image') || App.get('defaultImage')).property("image")
+  imageSource: (-> @get('image') || @get('image_url') ).property("image", "image_url")
 
   organizationUnit: (->
     return null unless @get('organization_unit_id')
