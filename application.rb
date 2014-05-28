@@ -21,7 +21,7 @@ class Application < Sinatra::Base
     js :app, ['/js/store.js', '/js/app.js', '/js/**/*.js']
     css :app, ['/css/*.css']
     css :vendor_css, ['/vendor/css/*.css']
-    js :vendor_js, ['/vendor/js/jquery-1.10.2.js',
+    js :vendor_js, ['/vendor/js/jquery-2.1.1-min.js',
       '/vendor/js/handlebars-1.3.0.js',
       '/vendor/js/ember-1.7.0-canary.js',
       '/vendor/js/*.js']
