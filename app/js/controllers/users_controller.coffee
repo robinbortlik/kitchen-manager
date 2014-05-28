@@ -6,7 +6,6 @@ App.UsersController = Ember.Controller.extend(
   actions:
     changeOrganization: (e) ->
       localStorage.setItem("organizationUnitId", e.data.id)
-      console.log  localStorage.getItem("organizationUnitId")
       @set 'organizationUnitId', e.data.id
 
   activeUsers: (->

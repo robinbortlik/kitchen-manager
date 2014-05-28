@@ -26,6 +26,8 @@ class Application < Sinatra::Base
       '/vendor/js/ember-1.7.0-canary.js',
       '/vendor/js/*.js']
     prebuild true
+    expires 86400*365, :public
+    cache_dynamic_assets true
   end
 
   ember {
