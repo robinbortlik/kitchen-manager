@@ -23,7 +23,7 @@ App.CartView = Em.View.extend(
 
     openProductGroupForm: ->
       view = App.ProductGroupForm.create()
-      product_group = App.ProductGroup.create()
+      product_group = App.ProductGroup.create(name: App.get("cart").computeGroupName(), position: App.get('currentUser.favourites').length + 1)
       view.set 'content', product_group
       view.appendTo("#ember-app")
 )

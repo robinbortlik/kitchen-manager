@@ -21,11 +21,10 @@ App.User.reopen Ember.Validations,
       presence: true
 
   favourites: []
+  popular: []
 
   name: (-> "#{@get('last_name')} #{@get('first_name')}").property("first_name", "last_name")
-
   mergedName: (-> @get("name").replace(" ","").removeDiacritics().toUpperCase()).property("name")
-
   imageSource: (-> @get('image') || @get('image_url') ).property("image", "image_url")
 
   organizationUnit: (->
@@ -45,6 +44,11 @@ App.User.reopen Ember.Validations,
       response.map (i) ->
         tmp.push App.ProductGroup.create(i)
       @set 'favourites', tmp
+
+  loadPopular: ->
+    ajax = $.ajax "/product_users/#{@get('id')}/popular"
+    ajax.done (response) =>
+      @set 'popular', response
 
   destroyResource: ->
     @set 'deleted', true

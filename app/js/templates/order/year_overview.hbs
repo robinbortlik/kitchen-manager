@@ -3,16 +3,31 @@
   {{#link-to 'order' App.currentUser.id class="btn btn-danger btn-lg pull-right"}}Back{{/link-to}}
 </h1>
 <table class="table table-striped  table-hover table-bordered">
-  <thead>
-    <th>Month</th>
-    {{#each App.store.products}}
-      {{view App.YearOverviewColumnHeaderView contentBinding="this"}}
-    {{/each}}
-    <th>Sum</th>
+  <thead class="yearOverviewHeader">
+    <tr>
+      <th>Month</th>
+      {{#group}}
+        {{#each month in controller.months}}
+          {{view App.YearOverviewColumnHeaderView  contentBinding="month"}}
+        {{/each}}
+      {{/group}}
+    </tr>
+    <tr>
+      <th>Sum</th>
+      {{#with view as oldView}}
+        {{#group}}
+          {{#each month in controller.months}}
+            {{view App.YearOverviewSumView contextBinding="oldView" contentBinding="month"}}
+          {{/each}}
+        {{/group}}
+      {{/with}}
+    </tr>
   </thead>
   <tbody>
-    {{#each view.months}}
-      {{view App.YearOverviewRowView contextBinding="view" monthBinding="this"}}
-    {{/each}}
+    {{#group}}
+      {{#each product in App.store.products}}
+        {{view App.YearOverviewRowView contentBinding="product"}}
+      {{/each}}
+    {{/group}}
   </tbody>
 </table>

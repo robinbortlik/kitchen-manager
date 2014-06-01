@@ -21,5 +21,14 @@ App.ProductsView = Em.View.extend
 
   chunkedProducts:(-> @get("filteredProducts").chunk(6)).property("filteredProducts")
 
+  chunkedPopular:(->
+    products = Em.makeArray(App.get('currentUser.popular')).map((productId) =>
+      @get("controller.activeProducts").findProperty('id', productId)
+    )
+    products.compact()
+    products.chunk(6)
+  ).property("App.currentUser.popular")
+
   didInsertElement: ->
     $(".nav-tabs li:first").addClass("active")
+    @set 'displayFavourites', true

@@ -4,8 +4,10 @@
 </h1>
 <table class="table table-striped  table-hover table-bordered">
   <tbody>
-    {{#each dayNumbers}}
-      {{view App.RowOrderMonthOverviewView contentBinding="this"}}
-    {{/each}}
+    {{#group}}
+      {{#each dayNumber in dayNumbers}}
+        {{view App.RowOrderMonthOverviewView contentBinding="dayNumber"}}
+      {{/each}}
+    {{/group}}
   </tbody>
 </table>

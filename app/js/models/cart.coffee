@@ -24,3 +24,7 @@ App.Cart = Em.Object.extend
     @get('content').forEach (i) ->
       tmp.push {product_id: Em.get(i, 'id')}
     tmp
+
+  computeGroupName: ->
+    names = @get('content').map (item) -> Em.get(item, 'name').slice(0,3)
+    names.join("-").slice(0,11)

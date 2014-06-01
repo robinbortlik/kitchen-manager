@@ -1,6 +1,6 @@
 App.FavouriteView = Em.View.extend
   template: Em.TEMPLATES['products/favourite']
-  classNames: ["col-md-3"]
+  classNames: ["favourite-item"]
 
 
   actions:

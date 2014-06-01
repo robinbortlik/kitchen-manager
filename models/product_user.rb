@@ -24,4 +24,13 @@ class ProductUser
     end
   end
 
+  def self.popular(user_id)
+    repository(:default).adapter.select('
+      SELECT product_id, COUNT(*) as count
+      FROM product_users
+      WHERE user_id = ?
+      GROUP BY product_id
+      ORDER BY count DESC
+      LIMIT 12', user_id)
+  end
 end

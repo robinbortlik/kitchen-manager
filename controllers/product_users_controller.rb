@@ -41,4 +41,11 @@ class Application < Sinatra::Base
     exporter = ProductUserExporter.new(product_users)
     exporter.generate
   end
+
+  get '/product_users/:id/popular' do
+    response.headers['Cache-Control'] = 'no-cache'
+    content_type :json
+    ProductUser.popular(params[:id]).map(&:product_id).to_json
+  end
+
 end
