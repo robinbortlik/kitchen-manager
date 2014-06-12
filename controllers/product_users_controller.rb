@@ -16,6 +16,7 @@ class Application < Sinatra::Base
     response.headers['Cache-Control'] = 'no-cache'
     content_type :json
     last = ProductUser.all(conditions: ["user_id = ?", params[:id]]).last
+    return [].to_json unless last
     ProductUser.all(conditions: ["user_id = ? AND created_at = ?", params[:id], last.created_at]).map(&:product_id).to_json
   end
 

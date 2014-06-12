@@ -25,7 +25,7 @@ App.ProductsView = Em.View.extend
     products = Em.makeArray(App.get('currentUser.popular')).map((productId) =>
       @get("controller.activeProducts").findProperty('id', productId)
     )
-    products.compact()
+    products = products.compact()
     products.chunk(6)
   ).property("App.currentUser.popular")
 
