@@ -5,6 +5,14 @@ class Application < Sinatra::Base
   register Sinatra::AssetPack
   register Sinatra::Ember
 
+  configure do
+    enable :logging
+    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+    file.sync = true
+    use Rack::CommonLogger, file
+    set :logging, Logger::INFO
+  end
+
   get '/' do
     erb :index
   end
