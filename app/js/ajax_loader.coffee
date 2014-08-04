@@ -1,5 +1,5 @@
 $(document).ajaxStart ->
-  $('<div class="spinner"></div>').prependTo("#ember-app")
+  Pace.restart()
 
 $(document).ajaxStop ->
-  $('.spinner').remove()
+  Pace.stop()
