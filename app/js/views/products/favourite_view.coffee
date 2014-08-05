@@ -1,7 +1,9 @@
+App.FavouritesView = Em.CollectionView.extend
+  itemViewClass: 'App.FavouriteView'
+
 App.FavouriteView = Em.View.extend
   template: Em.TEMPLATES['products/favourite']
   classNames: ["favourite-item"]
-
 
   actions:
     add: ->

@@ -1,13 +1,11 @@
 App.ProductsView = Em.View.extend
   template: Em.TEMPLATES['products/list']
-  contentBinding: 'controller.activeProducts'
   actions:
     filter: (category) ->
-      @set 'displayFavourites', false
-      @set "selectedCategoryId", category.get("id")
+      catId = Em.get(category,"id")
+      @set 'displayFavourites', !catId
+      @set "selectedCategoryId", catId
 
-    favourites: ->
-      @set 'displayFavourites', true
 
   filteredProducts: (->
     if @get("selectedCategoryId")
@@ -17,17 +15,18 @@ App.ProductsView = Em.View.extend
         @get("controller.activeProducts").filterBy('category_id', cat.get("id"))
       else
         @get("controller.activeProducts")
-  ).property('content', 'selectedCategoryId')
+  ).property('controller.activeProducts', 'selectedCategoryId')
 
-  chunkedProducts:(-> @get("filteredProducts").chunk(6)).property("filteredProducts")
-
-  chunkedPopular:(->
-    products = Em.makeArray(App.get('currentUser.popular')).map((productId) =>
+  popular:(->
+    Em.makeArray(App.get('currentUser.popular')).map((productId) =>
       @get("controller.activeProducts").findProperty('id', productId)
-    )
-    products = products.compact()
-    products.chunk(6)
+    ).compact()
   ).property("App.currentUser.popular")
+
+  categories: (->
+    favourites = Em.Object.create(name: 'Favourites', id: null, position: 1)
+    [favourites].concat(App.store.get('categories'))
+  ).property('App.store.categories')
 
   didInsertElement: ->
     $(".nav-tabs li:first").addClass("active")

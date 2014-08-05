@@ -1,3 +1,6 @@
+App.ProductsListView = Em.CollectionView.extend
+  itemViewClass: 'App.ProductView'
+
 App.ProductView = Em.View.extend
   template: Em.TEMPLATES['products/item']
   click: ->

@@ -1,51 +1,21 @@
 <div class="col-xs-9">
-  <ul class="nav nav-tabs">
-    <li><a {{action 'favourites' this target='view'}} data-toggle="tab">Favourites</a></li>
-    {{#each App.store.categories}}
-      <li><a {{action 'filter' this target='view'}} data-category-id="{{unbound id}}" data-toggle="tab">{{unbound name}}</a></li>
-    {{/each}}
-  </ul>
+  {{view App.CategoriesListView contentBinding="view.categories"}}
 
   <div class="tab-content">
     {{#if view.displayFavourites}}
       {{#if App.currentUser.favourites}}
         <h3>Groups</h3>
         <hr />
-        {{#group}}
-          <div class="row favourites">
-            {{#each favourite in App.currentUser.favourites}}
-              {{view App.FavouriteView contentBinding="favourite"}}
-            {{/each}}
-          </div>
-        {{/group}}
+        <div class="row favourites">
+          {{view App.FavouritesView contentBinding="App.currentUser.favourites"}}
+        </div>
       {{/if}}
-
 
       <h3>Products</h3>
       <hr />
-      {{#group}}
-        {{#each products in view.chunkedPopular}}
-          <div class="row">
-            {{#each product in products}}
-              {{view App.ProductView contentBinding="product"}}
-            {{/each}}
-          <br/>
-          </div>
-        {{/each}}
-      {{/group}}
-
+      {{view App.ProductsListView contentBinding="view.popular"}}
     {{else}}
-      <br />
-      {{#group}}
-        {{#each products in view.chunkedProducts}}
-          <div class="row">
-            {{#each product in products}}
-              {{view App.ProductView contentBinding="product"}}
-            {{/each}}
-          <br/>
-          </div>
-        {{/each}}
-      {{/group}}
+      {{view App.ProductsListView contentBinding="view.filteredProducts"}}
     {{/if}}
   </div>
 </div>
