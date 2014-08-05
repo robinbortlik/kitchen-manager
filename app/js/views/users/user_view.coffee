@@ -5,6 +5,9 @@ App.UserView = Em.View.extend(
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
 )
 
+App.UsersListView = Em.CollectionView.extend
+  itemViewClass: 'App.UserView'
+
 App.SmallUserView = Em.View.extend
   style: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
   classNames: ["userPhoto", "userSmallPhoto"]
