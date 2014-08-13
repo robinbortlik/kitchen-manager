@@ -21,9 +21,6 @@
       <th>{{name}}<br/>{{formatMoney price}}</th>
     {{/each}}
   </thead>
-  <tbody>
-    {{#each App.store.users}}
-      {{view App.AdminOverviewRowView contentBinding="this"}}
-    {{/each}}
-  </tbody>
+
+  {{collection tagName='tbody' itemViewClass='App.AdminOverviewRowView' contentBinding='App.store.users'}}
 </table>

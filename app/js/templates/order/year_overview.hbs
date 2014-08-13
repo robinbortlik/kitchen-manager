@@ -23,11 +23,5 @@
       {{/with}}
     </tr>
   </thead>
-  <tbody>
-    {{#group}}
-      {{#each product in App.store.products}}
-        {{view App.YearOverviewRowView contentBinding="product"}}
-      {{/each}}
-    {{/group}}
-  </tbody>
+  {{collection tagName='tbody' itemViewClass='App.YearOverviewRowView' contentBinding='App.store.products'}}
 </table>

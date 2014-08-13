@@ -11,10 +11,14 @@
   -o-transition: width 1s
   transition: width 1s
 
+#flash-message
+  position: fixed
+  width: 100%
+  z-index: 50
+  padding-right: 30px
 
 .pace-inactive
   display: none
-
 
 .panel-body .row
   padding-left: 0
@@ -165,23 +169,14 @@ body
 .yearOverviewTable tbody tr td:nth-child(6),
 .yearOverviewTable tbody tr td:nth-child(8),
 .yearOverviewTable tbody tr td:nth-child(10),
-.yearOverviewTable tbody tr td:nth-child(12)
-  background-color: #eee
+.yearOverviewTable tbody tr td:nth-child(12),
+.yearOverviewTable thead tr th:nth-child(2),
+.yearOverviewTable thead tr th:nth-child(4),
+.yearOverviewTable thead tr th:nth-child(6),
+.yearOverviewTable thead tr th:nth-child(8),
+.yearOverviewTable thead tr th:nth-child(10),
+.yearOverviewTable thead tr th:nth-child(12)
 
-.yearOverviewHeader tr.months th:nth-child(3),
-.yearOverviewHeader tr.months th:nth-child(5),
-.yearOverviewHeader tr.months th:nth-child(7),
-.yearOverviewHeader tr.months th:nth-child(9),
-.yearOverviewHeader tr.months th:nth-child(11),
-.yearOverviewHeader tr.months th:nth-child(13)
-  background-color: #eee
-
-.yearOverviewHeader tr.sum th:nth-child(4),
-.yearOverviewHeader tr.sum th:nth-child(6),
-.yearOverviewHeader tr.sum th:nth-child(8),
-.yearOverviewHeader tr.sum th:nth-child(10),
-.yearOverviewHeader tr.sum th:nth-child(12),
-.yearOverviewHeader tr.sum th:nth-child(14)
   background-color: #eee
 
 .yearOverviewHeader tr.sum th
