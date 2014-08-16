@@ -3,3 +3,4 @@ $(document).ajaxStart ->
 
 $(document).ajaxStop ->
   Pace.stop()
+  $('body').removeClass('pace-running')
