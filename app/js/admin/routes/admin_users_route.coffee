@@ -1,4 +1,4 @@
-App.AdminUsersRoute = Ember.Route.extend(SimpleAuth,
+App.AdminUsersRoute = Ember.Route.extend(
   setupController: (controller, model) ->
     App.get('store.usersCollection').expire()
     Em.run.next =>

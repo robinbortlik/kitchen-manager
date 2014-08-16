@@ -5,7 +5,6 @@ App.Category = Ember.Resource.define
     name:  String
     position: Number
 
-
 App.Category.reopen Ember.Validations,
   validations:
     name:
@@ -15,4 +14,3 @@ App.Category.reopen Ember.Validations,
       numericality:
         onlyInteger: true
         greaterThan: 0
-

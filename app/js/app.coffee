@@ -1,14 +1,11 @@
 window.App = Ember.Application.create(
   rootElement: '#ember-app'
   LOG_TRANSITIONS: false
-  currency: "Kč"
+  currency: window.currency
   currentUser: null
   cart: null
   store: null
   selectedLetters: Em.ArrayProxy.create(content: [])
-  initialize: (container, application) ->
-    Ember.SimpleAuth.setup(application)
-
 
   addToBasket: (item) -> @get("cart.content").pushObject(item)
 
@@ -21,8 +18,6 @@ window.App = Ember.Application.create(
   ready: ->
     @set 'cart', new App.Cart(content: [])
     @set 'store', new Store
-    $("#ember-app .spinner").remove()
-
 )
 
 

@@ -4,6 +4,26 @@ class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
   register Sinatra::AssetPack
   register Sinatra::Ember
+  use AdminController
+  use PublicController
+  enable :sessions
+  helpers Authorize
+
+  get '/' do
+    erb :index
+  end
+
+  get '/admin' do
+    authorize!
+    session[:is_admin] = true
+    redirect '/#/admin'
+  end
+
+  helpers do
+    def is_admin
+      !!session[:is_admin]
+    end
+  end
 
   configure do
     enable :logging
@@ -13,20 +33,15 @@ class Application < Sinatra::Base
     set :logging, Logger::INFO
   end
 
-  get '/' do
-    erb :index
-  end
-
-  get '/health-check' do
-    "OK"
-  end
-
   assets do
-    serve '/app', from: 'app'
+    serve '/public_app', from: 'app'
+    serve '/admin_app', from: 'app'
     serve '/vendor/js', from: 'vendor/js'
     serve '/vendor/css', from: 'vendor/css'
 
-    js :app, ['/js/store.js', '/js/app.js', '/js/**/*.js']
+    js :public_app, ['/js/store.js', '/js/app.js', '/js/*.js', '/js/helpers/**/*.js', '/js/models/**/*.js', '/js/public/**/*.js']
+    js :admin_app, ['/js/admin/**/*.js']
+
     css :app, ['/css/*.css']
     css :vendor_css, ['/vendor/css/*.css']
     js :vendor_js, ['/vendor/js/jquery-2.1.1-min.js',
@@ -39,7 +54,8 @@ class Application < Sinatra::Base
   end
 
   ember {
-    templates '/js/templates.js', ['app/js/templates/**/*.hbs'], :relative_to => 'app/js/templates'
+    templates '/js/templates_public.js', ['app/js/public/templates/**/*.hbs'], :relative_to => 'app/js/public/templates'
+    templates '/js/templates_admin.js', ['app/js/admin/templates/**/*.hbs'], :relative_to => 'app/js/admin/templates'
   }
 
 end

@@ -30,7 +30,7 @@ describe Application do
     page.find("h4", text: product.name).click
     expect(page).to have_content("2x (4.00 Kč)")
 
-    expect{click_on "I'm done"; sleep(1)}.to change{ProductUser.count}.by(2)
+    expect{click_on "I'm done"; wait_for_ajax}.to change{ProductUser.count}.by(2)
     expect(page).to have_content "Order was successfully created"
   end
 

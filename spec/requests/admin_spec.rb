@@ -67,7 +67,7 @@ describe "Admin" do
       page.find(:css, "input[placeholder='First Name']").set "Robin"
       page.find(:css, "input[placeholder='Last Name']").set "Bortlik"
       page.find(:css, "select").set organization_unit.id
-      expect{click_on "Save"; sleep(2)}.to change{User.count}.by(1)
+      expect{click_on "Save"; wait_for_ajax}.to change{User.count}.by(1)
       within "table" do
         expect(page).to have_content "Robin"
       end
@@ -82,7 +82,7 @@ describe "Admin" do
       expect(page).to have_selector(".modal-content")
       page.find(:css, "input[placeholder='First Name']").set "new Robin"
       page.find(:css, "input[placeholder='Last Name']").set "Bortlik"
-      expect{click_on "Save"; sleep(1)}.to change{User.last.name}.from("Alex Zavadsky").to("new Robin Bortlik")
+      expect{click_on "Save"; wait_for_ajax}.to change{User.last.name}.from("Alex Zavadsky").to("new Robin Bortlik")
       within "table" do
         expect(page).to have_content "new Robin"
       end
@@ -92,7 +92,7 @@ describe "Admin" do
       user
       visit '/admin'
       click_on "Users"
-      expect{page.find(:css, "span.glyphicon-trash").click; sleep(1)}.to change{User.last.deleted}.from(nil).to(true)
+      expect{page.find(:css, "span.glyphicon-trash").click; wait_for_ajax}.to change{User.last.deleted}.from(nil).to(true)
     end
 
     it "unmark as deleted", :request => true, :js =>true do
@@ -100,7 +100,7 @@ describe "Admin" do
       user.save!
       visit '/admin'
       click_on "Users"
-      expect{page.find(:css, "span.glyphicon-refresh").click; sleep(1)}.to change{User.last.deleted}.from(true).to(false)
+      expect{page.find(:css, "span.glyphicon-refresh").click; wait_for_ajax}.to change{User.last.deleted}.from(true).to(false)
     end
 
   end
@@ -116,7 +116,7 @@ describe "Admin" do
       page.find(:css, "input[placeholder='Name']").set "Product 1"
       page.find(:css, "input[placeholder='Price']").set "10"
       page.find(:css, "select").set category.id
-      expect{click_on "Save"; sleep(1)}.to change{Product.count}.by(1)
+      expect{click_on "Save"; wait_for_ajax}.to change{Product.count}.by(1)
       within "table" do
         expect(page).to have_content "Product 1"
         expect(page).to have_content "10"
@@ -132,7 +132,7 @@ describe "Admin" do
       expect(page).to have_selector(".modal-content")
       page.find(:css, "input[placeholder='Name']").set "new Apple"
       page.find(:css, "select").set category.id
-      expect{click_on "Save"; sleep(1)}.to change{Product.last.name}.from("Banana").to("new Apple")
+      expect{click_on "Save"; wait_for_ajax}.to change{Product.last.name}.from("Banana").to("new Apple")
       within "table" do
         expect(page).to have_content "new Apple"
       end
@@ -142,7 +142,7 @@ describe "Admin" do
       product
       visit '/admin'
       click_on "Products"
-      expect{page.find(:css, "span.glyphicon-trash").click; sleep(1)}.to change{Product.last.deleted}.from(nil).to(true)
+      expect{page.find(:css, "span.glyphicon-trash").click; wait_for_ajax}.to change{Product.last.deleted}.from(nil).to(true)
     end
 
     it "unmark as deleted", :request => true, :js =>true do
@@ -150,7 +150,7 @@ describe "Admin" do
       product.save!
       visit '/admin'
       click_on "Products"
-      expect{page.find(:css, "span.glyphicon-refresh").click; sleep(1)}.to change{Product.last.deleted}.from(true).to(false)
+      expect{page.find(:css, "span.glyphicon-refresh").click; wait_for_ajax}.to change{Product.last.deleted}.from(true).to(false)
     end
 
   end

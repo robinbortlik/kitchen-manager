@@ -8,3 +8,4 @@ tmp
 seed.rb
 public/images/users/*.png
 public/images/products/*.png
+config/settings.yml

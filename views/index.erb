@@ -31,8 +31,18 @@
     <div id="ember-app"><div class="spinner"></div></div>
 
     <%= js :vendor_js %>
-    <script src="js/templates.js"></script>
-    <%= js :app %>
+    <script src="js/templates_public.js"></script>
+    <% if is_admin %>
+      <script src="js/templates_admin.js"></script>
+    <% end %>
+
+    <script type="text/javascript">
+      window.currency = "<%= AppSetting.currency %>"
+    </script>
+
+    <%= js :public_app %>
+    <%= js :admin_app if is_admin %>
+
     <script type="text/javascript">
       Offline.check();
     </script>

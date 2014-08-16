@@ -22,6 +22,7 @@ DataMapper.auto_upgrade!
 
 require File.join(File.dirname(__FILE__), '..', 'application.rb')
 Dir[File.dirname(__FILE__) + '/factories/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/extensions/*.rb'].each {|file| require file }
 
 Spork.prefork do
 

@@ -15,6 +15,7 @@ gem 'axlsx'
 gem 'sort_alphabetical'
 gem 'sinatra-ember'
 gem 'spreadsheet'
+gem 'bcrypt'
 
 group :test do
   gem 'rspec'            # Rspec tests

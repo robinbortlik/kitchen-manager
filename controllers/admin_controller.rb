@@ -1,8 +1,9 @@
-# Define Startups actions
-class Application < Sinatra::Base
+Dir[File.dirname(__FILE__) + '/admin/*.rb'].each {|file| require file }
 
-  get '/admin' do
-    redirect '/#/admin'
-  end
-
+class AdminController < Sinatra::Base
+  use Admin::Categories
+  use Admin::OrganizationUnits
+  use Admin::ProductUsers
+  use Admin::Products
+  use Admin::Users
 end
