@@ -24,9 +24,6 @@ group :test do
   gem 'launchy'            # 'show me the page'
   gem 'database_cleaner'   # Tidy database after testing
   gem 'factory_girl'       # Fixtures
-  gem 'jasmine'
-  gem 'guard-coffeescript'
-  gem 'guard-jasmine'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem "capybara-webkit"

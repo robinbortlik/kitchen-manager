@@ -44,6 +44,7 @@ Spork.prefork do
     config.include Rack::Test::Methods
     config.include Capybara::DSL
     config.include FactoryGirl::Syntax::Methods
+    config.include WaitForAjax
 
     config.before(:each) do
       DatabaseCleaner.start

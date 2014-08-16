@@ -19,7 +19,3 @@ module WaitForAjax
     old_value == new_value
   end
 end
-
-RSpec.configure do |config|
-  config.include WaitForAjax, type: :feature
-end

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "Admin" do
+  def visit_admin
+    visit '/admin'
+    wait_for_ajax
+  end
 
   let(:user) {FactoryGirl.create(:user, organization_unit_id: organization_unit.id)}
   let(:product) {FactoryGirl.create(:product, price: 2, category_id: category.id)}
@@ -9,17 +13,17 @@ describe "Admin" do
   let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 15, is_paid: false, created_at: Date.today)}
 
   before do
-    page.evaluate_script("window.password = 'f00d' ")
+    allow_any_instance_of(Application).to receive(:authorize!).and_return(true)
   end
 
   describe "overview" do
 
     it 'toggle is paid', :request => true, :js =>true do
       product_user
-      visit '/admin'
+      visit_admin
       within "table" do
         expect(page.find("th", text: product.name)).not_to be_nil
-        expect(page.find("strong", text: "15.00 Kč")).not_to be_nil
+        expect(page.find("strong", text: "15.00 $")).not_to be_nil
         page.find("i.glyphicon-check").click
       end
       expect(page).to have_content "Paid status was set to true"
@@ -32,24 +36,24 @@ describe "Admin" do
 
     it 'filter data', :request => true, :js =>true do
       product_user
-      visit '/admin'
+      visit_admin
       within "table" do
         expect(page.find("th", text: product.name)).not_to be_nil
-        expect(page.find("strong", text: "15.00 Kč")).not_to be_nil
+        expect(page.find("strong", text: "15.00 $")).not_to be_nil
       end
 
       fill_in 'From', with: '2014-01-01'
       fill_in 'To', with: '2014-01-02'
 
       within "table" do
-        expect(page.find("strong", text: "0.00 Kč")).not_to be_nil
+        expect(page.find("strong", text: "0.00 $")).not_to be_nil
       end
 
       fill_in 'From', with: Date.today.to_s
       fill_in 'To', with: Date.today.to_s
 
       within "table" do
-        expect(page.find("strong", text: "15.00 Kč")).not_to be_nil
+        expect(page.find("strong", text: "15.00 $")).not_to be_nil
       end
 
     end
@@ -60,7 +64,7 @@ describe "Admin" do
   describe "users" do
 
     it "create user", :request => true, :js =>true do
-      visit '/admin'
+      visit_admin
       click_on "Users"
       page.find("button", text: "New").click
       expect(page).to have_selector(".modal-content")
@@ -75,7 +79,7 @@ describe "Admin" do
 
     it "edit user", :request => true, :js =>true do
       user
-      visit '/admin'
+      visit_admin
       click_on "Users"
       expect(page).to have_content "Alex Zavadsky"
       page.find(:css, "span.glyphicon-pencil").click
@@ -90,7 +94,7 @@ describe "Admin" do
 
     it "mark as deleted", :request => true, :js =>true do
       user
-      visit '/admin'
+      visit_admin
       click_on "Users"
       expect{page.find(:css, "span.glyphicon-trash").click; wait_for_ajax}.to change{User.last.deleted}.from(nil).to(true)
     end
@@ -98,7 +102,7 @@ describe "Admin" do
     it "unmark as deleted", :request => true, :js =>true do
       user.deleted = true
       user.save!
-      visit '/admin'
+      visit_admin
       click_on "Users"
       expect{page.find(:css, "span.glyphicon-refresh").click; wait_for_ajax}.to change{User.last.deleted}.from(true).to(false)
     end
@@ -109,7 +113,7 @@ describe "Admin" do
   describe "products" do
 
     it "create product", :request => true, :js =>true do
-      visit '/admin'
+      visit_admin
       click_on "Products"
       page.find("button", text: "New").click
       expect(page).to have_selector(".modal-content")
@@ -125,7 +129,7 @@ describe "Admin" do
 
     it "edit product", :request => true, :js =>true do
       product
-      visit '/admin'
+      visit_admin
       click_on "Products"
       expect(page).to have_content "Banana"
       page.find(:css, "span.glyphicon-pencil").click
@@ -140,7 +144,7 @@ describe "Admin" do
 
     it "mark as deleted", :request => true, :js =>true do
       product
-      visit '/admin'
+      visit_admin
       click_on "Products"
       expect{page.find(:css, "span.glyphicon-trash").click; wait_for_ajax}.to change{Product.last.deleted}.from(nil).to(true)
     end
@@ -148,7 +152,7 @@ describe "Admin" do
     it "unmark as deleted", :request => true, :js =>true do
       product.deleted = true
       product.save!
-      visit '/admin'
+      visit_admin
       click_on "Products"
       expect{page.find(:css, "span.glyphicon-refresh").click; wait_for_ajax}.to change{Product.last.deleted}.from(true).to(false)
     end

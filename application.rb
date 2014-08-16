@@ -25,12 +25,14 @@ class Application < Sinatra::Base
     end
   end
 
-  configure do
-    enable :logging
-    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
-    file.sync = true
-    use Rack::CommonLogger, file
-    set :logging, Logger::INFO
+  if production?
+    configure do
+      enable :logging
+      file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+      file.sync = true
+      use Rack::CommonLogger, file
+      set :logging, Logger::INFO
+    end
   end
 
   assets do

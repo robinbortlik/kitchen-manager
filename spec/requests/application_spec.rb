@@ -28,7 +28,7 @@ describe Application do
     page.find("a", text: category.name).click
     page.find("h4", text: product.name).click
     page.find("h4", text: product.name).click
-    expect(page).to have_content("2x (4.00 Kč)")
+    expect(page).to have_content("2x (4.00 $)")
 
     expect{click_on "I'm done"; wait_for_ajax}.to change{ProductUser.count}.by(2)
     expect(page).to have_content "Order was successfully created"
@@ -41,9 +41,9 @@ describe Application do
     page.find("h4", text: product.name).click
     page.find("h4", text: product.name).click
     within ".panel" do
-      expect(page).to have_content("2x (4.00 Kč)")
+      expect(page).to have_content("2x (4.00 $)")
       page.find("div.row", text: product.name).click
-      expect(page).to have_content("1x (2.00 Kč)")
+      expect(page).to have_content("1x (2.00 $)")
     end
   end
 
@@ -59,7 +59,7 @@ describe Application do
     end
 
     expect(page.find("th", text: product.name)).not_to be_nil
-    expect(page.find("td", text: "30.00 Kč")).not_to be_nil
+    expect(page.find("td", text: "30.00 $")).not_to be_nil
   end
 
   it 'cancel order', :request => true, :js =>true do
