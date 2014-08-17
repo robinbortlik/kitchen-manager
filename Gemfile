@@ -26,5 +26,5 @@ group :test do
   gem 'factory_girl'       # Fixtures
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem "capybara-webkit"
+  gem "poltergeist"
 end

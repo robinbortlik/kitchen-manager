@@ -1,13 +1,12 @@
 require 'rubygems'
 require 'spork'
-require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 require 'sinatra'
 Sinatra::Application.environment = :test
 
 require 'capybara/rspec'
-require 'capybara-webkit'
+require 'capybara/poltergeist'
 require 'database_cleaner'
 require 'rack/test'
 require 'rspec'
@@ -31,12 +30,19 @@ Spork.prefork do
   set :raise_errors, true
   set :logging, false
 
+  module Authorize
+    def authorize!
+      true
+    end
+  end
+
   def app
     Rack::Builder.parse_file(File.expand_path('../../config.ru', __FILE__)).first
   end
 
-  Capybara.javascript_driver = :webkit
-  Capybara.app =  app
+  Capybara.javascript_driver = :poltergeist
+  Capybara.default_wait_time = 10
+  Capybara.app = app
 
   RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
@@ -45,6 +51,7 @@ Spork.prefork do
     config.include Capybara::DSL
     config.include FactoryGirl::Syntax::Methods
     config.include WaitForAjax
+    config.include CustomHelpers
 
     config.before(:each) do
       DatabaseCleaner.start

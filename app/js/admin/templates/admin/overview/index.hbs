@@ -2,10 +2,10 @@
 <p>
   <form class="form-inline">
     <div class="form-group">
-      <label class="control-label">From
+      <label class="control-label" id="dateFrom">From
         {{view App.DatePicker valueBinding='controller.fromDate'}}
       </label>
-      <label class="control-label">To
+      <label class="control-label" id="dateTo">To
         {{view App.DatePicker valueBinding='controller.toDate'}}
       </label>
       <button class="btn btn-success" {{action 'export' target='view'}}>Export</button>

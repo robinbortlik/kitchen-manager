@@ -22,7 +22,7 @@ module Admin
 
     protected_delete '/organization_units/:id' do
       content_type :json
-      OrganizationUnit = organization_unit.first(id: params[:id])
+      organization_unit = OrganizationUnit.first(id: params[:id])
       if organization_unit.destroy
         User.all(organization_unit_id: organization_unit.id).update(organization_unit_id: nil)
       end
