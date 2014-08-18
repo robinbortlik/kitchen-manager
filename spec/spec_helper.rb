@@ -1,3 +1,4 @@
+ENV['RACK_ENV'] = 'test'
 require 'rubygems'
 require 'spork'
 require 'bundler/setup'

@@ -23,6 +23,13 @@ module Public
       "".to_json
     end
 
+    delete '/product_users/:id' do
+      content_type :json
+      product_user = ProductUser.first(id: params[:id], is_paid: [nil, false])
+      product_user.destroy
+      product_user.to_json
+    end
+
     get '/product_users/:id/popular' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json

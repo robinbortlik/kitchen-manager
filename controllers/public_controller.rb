@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/public/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/public/*.rb'].sort.each {|file| require file }
 
 class PublicController < Sinatra::Base
   use Public::Categories

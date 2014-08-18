@@ -5,7 +5,7 @@ describe 'basic functions', :request => true, :js =>true do
   let!(:user) {FactoryGirl.create(:user)}
   let!(:product) {FactoryGirl.create(:product, price: 2, category_id: category.id)}
   let(:category) {Category.first || FactoryGirl.create(:category)}
-  let(:product_user) {ProductUser.create(user_id: user.id, product_id: product.id, price: 30)}
+  let(:product_user) {ProductUser.create(name: product.name, user_id: user.id, product_id: product.id, price: 30, created_at: Time.now)}
 
 
   it 'get home page' do
@@ -62,13 +62,22 @@ describe 'basic functions', :request => true, :js =>true do
     expect(page.find("th", text: "30.00 $")).not_to be_nil
   end
 
+  it 'remove wrong order' do
+    product_user
+    visit '/'
+    page.find("h5", text: user.name).click
+    page.find("a", text: "Overview").click
+    click_on Date::MONTHNAMES[product_user.created_at.month]
+    wait_for_ajax
+    expect(page.find(".pill", text: product_user.name)).not_to be_nil
+    expect{page.find(".pill i[title='Delete']").click; wait_for_ajax}.to change{ProductUser.count}.by(-1)
+  end
+
   it 'cancel order' do
     visit '/'
     page.find("h5", text: user.name).click
     click_on "Cancel"
     expect(current_path).to eq "/"
   end
-
-
 
 end

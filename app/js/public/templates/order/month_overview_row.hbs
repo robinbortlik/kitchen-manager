@@ -1,6 +1,11 @@
 <td>{{unbound view.content}}</td>
 <td>
   {{#each view.orderedProducts}}
-    <span class="pill">{{unbound name}} {{unbound formatMoney price}}</span>
+    <span class="pill">
+      {{unbound name}} {{unbound formatMoney price}}
+      {{#unless is_paid}}
+        <i title="Delete" class="glyphicon glyphicon-remove" {{action 'remove' this.id target='controller'}}></i>
+      {{/unless}}
+    </span>
   {{/each}}
 </td>

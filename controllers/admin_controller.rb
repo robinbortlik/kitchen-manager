@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/admin/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/admin/*.rb'].sort.each {|file| require file }
 
 class AdminController < Sinatra::Base
   use Admin::Categories

@@ -24,6 +24,14 @@ App.OrderMonthOverviewController = Em.Controller.extend(
   monthNumber: null
   year: null
 
+  actions:
+    remove: (itemId) ->
+      if confirm('Are you sure')
+        obj = App.get('store.currentUserProducts').findBy('id', parseInt(itemId))
+        App.ProductUser.create(obj).destroyResource().done =>
+          App.get('store.currentUserProducts').removeObject(obj)
+          App.get('store').propertyDidChange('currentUserProducts')
+
   month: (->
     moment.months()[@get('monthIndex')]
   ).property('monthIndex')

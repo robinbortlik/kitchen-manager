@@ -16,6 +16,7 @@ gem 'sort_alphabetical'
 gem 'sinatra-ember'
 gem 'spreadsheet'
 gem 'bcrypt'
+gem 'moneta'
 
 group :test do
   gem 'rspec'            # Rspec tests
