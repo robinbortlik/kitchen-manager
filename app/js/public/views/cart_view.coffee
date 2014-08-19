@@ -42,7 +42,7 @@ App.CartItemView = Em.View.extend(
 
 App.ProductGroupForm = Em.View.extend
   template: Em.TEMPLATES['product_groups/form']
-  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  layout: Em.TEMPLATES['layouts/modal_layout']
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create Favourite Combination' else 'Edit Favourite Combination' ).property('content')
 

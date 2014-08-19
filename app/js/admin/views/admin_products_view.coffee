@@ -11,7 +11,7 @@ App.AdminProductsView = Em.View.extend
 
 App.AdminProductForm = Em.View.extend
   template: Em.TEMPLATES['admin/products/form']
-  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  layout: Em.TEMPLATES['layouts/modal_layout']
   contextBinding: 'content'
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")
   title: (-> if @get("content.isNew") then 'Create Product' else 'Edit Product' ).property('content')

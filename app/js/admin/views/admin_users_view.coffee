@@ -11,7 +11,7 @@ App.AdminUsersView = Em.View.extend
 
 App.AdminUserForm = Em.View.extend
   template: Em.TEMPLATES['admin/users/form']
-  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  layout: Em.TEMPLATES['layouts/modal_layout']
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create User' else 'Edit User' ).property('content')
   background: (-> "background:url(#{@get('content.imageSource')})").property("content.imageSource")

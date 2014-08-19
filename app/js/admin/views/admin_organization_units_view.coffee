@@ -11,7 +11,7 @@ App.AdminOrganizationUnitsView = Em.View.extend
 
 App.AdminOrganizationUnitForm = Em.View.extend
   template: Em.TEMPLATES['admin/organization_units/form']
-  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  layout: Em.TEMPLATES['layouts/modal_layout']
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create Organization Unit' else 'Edit Organization Unit' ).property('content')
 

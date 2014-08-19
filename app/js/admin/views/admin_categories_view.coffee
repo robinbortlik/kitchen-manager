@@ -11,7 +11,7 @@ App.AdminCategoriesView = Em.View.extend
 
 App.AdminCategoryForm = Em.View.extend
   template: Em.TEMPLATES['admin/categories/form']
-  layout: Em.TEMPLATES['admin/layouts/modal_layout']
+  layout: Em.TEMPLATES['layouts/modal_layout']
   contextBinding: 'content'
   title: (-> if @get("content.isNew") then 'Create Category' else 'Edit Category' ).property('content')
 
