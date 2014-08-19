@@ -4,7 +4,7 @@ module Public
     get '/products' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json
-      Product.all(:order => :position.asc ).to_a.to_json
+      Product.all_serialized
     end
 
   end

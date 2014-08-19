@@ -17,6 +17,7 @@ gem 'sinatra-ember'
 gem 'spreadsheet'
 gem 'bcrypt'
 gem 'moneta'
+gem 'oj'
 
 group :test do
   gem 'rspec'            # Rspec tests

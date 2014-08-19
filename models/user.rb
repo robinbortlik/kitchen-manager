@@ -20,15 +20,34 @@ class User
   end
 
   def image_url
-    if File.exists? image_path
+    self.class.image_url(id)
+  end
+
+  def self.image_url(id)
+    if File.exists? self.image_path(id)
       "/images/users/#{id}.png"
     else
       "/images/noimage.jpg"
     end
   end
 
-  def image_path
+  def self.image_path(id)
     "public/images/users/#{id}.png"
+  end
+
+  def image_path
+    self.class.image_path(id)
+  end
+
+  def self.all_serialized
+    users = repository(:default).adapter.select("SELECT id, first_name, last_name, deleted, organization_unit_id FROM users")
+    array = users.sort_alphabetical_by(&:last_name).map do |user|
+      hash = user.to_h
+      hash[:image] = nil
+      hash[:image_url] = User.image_url(hash[:id])
+      hash
+    end
+    OjSerializer.serialize array.to_a
   end
 
   def to_json(opts={})

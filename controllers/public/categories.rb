@@ -4,7 +4,7 @@ module Public
     get '/categories' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json
-      Category.all(:order => :position.asc ).to_json
+      Category.all_serialized
     end
 
   end
