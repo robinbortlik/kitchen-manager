@@ -8,7 +8,7 @@ class Application < Sinatra::Base
   use PublicController
   helpers Authorize
 
-  use Rack::Session::Moneta, store: Moneta.new(:DataMapper, setup: ("sqlite://#{Dir.pwd}/development.db"))
+  use Rack::Session::Moneta, store: Moneta.new(:DataMapper, setup: ("sqlite://#{Dir.pwd}/db/development.db"))
 
   get '/' do
     erb :index

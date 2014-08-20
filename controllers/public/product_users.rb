@@ -4,7 +4,9 @@ module Public
     get '/product_users/user_overview' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json
-      OjSerializer.serialize ProductUser.all(conditions: ["user_id = ? AND strftime('%Y', created_at) = ?", params[:user_id], params[:year]]).to_a
+      ProductUser.all_serialized(
+        conditions: ["user_id = #{params[:user_id].to_i} AND strftime('%Y', created_at) = '#{params[:year].to_i}'"]
+      )
     end
 
     get '/product_users/:id/last_order' do
@@ -12,7 +14,10 @@ module Public
       content_type :json
       last = ProductUser.all(conditions: ["user_id = ?", params[:id]]).last
       return [].to_json unless last
-      OjSerializer.serialize ProductUser.all(conditions: ["user_id = ? AND created_at = ?", params[:id], last.created_at]).map(&:product_id)
+      ProductUser.all_serialized(
+        fields: [:id, :product_id],
+        conditions: ["user_id = #{params[:id].to_i} AND created_at = '#{last.created_at.to_s}'"]
+      )
     end
 
     post '/product_users' do

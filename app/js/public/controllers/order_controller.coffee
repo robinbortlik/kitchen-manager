@@ -11,8 +11,8 @@ App.OrderController = Em.ArrayController.extend(
         method: "GET"
 
       ajax.done (response) =>
-        Em.makeArray(response).forEach (productId) =>
-          product = @get('activeProducts').findProperty("id", productId)
+        Em.makeArray(response).forEach (product) =>
+          product = @get('activeProducts').findProperty("id", Em.get(product, 'product_id'))
           App.addToBasket(product) if product
 )
 

@@ -33,4 +33,11 @@ class ProductUser
       ORDER BY count DESC
       LIMIT 12', user_id)
   end
+
+  def self.all_serialized(options = {})
+    query = repository(:default).new_query(ProductUser, options)
+    sql = repository(:default).adapter.send(:select_statement, query)
+    array = repository(:default).adapter.select sql[0]
+    OjSerializer.serialize array.map(&:to_h)
+  end
 end

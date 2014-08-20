@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/rchampourlier/guard-shotgun.git
+  revision: 0677d3ff0a8fe481a9d0f9fd9eaf1f212f623144
+  specs:
+    guard-shotgun (0.3.0)
+      ffi
+      guard
+      spoon
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -119,6 +128,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oj (2.8.1)
+    oj_mimic_json (1.0.1)
     poltergeist (1.5.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -175,6 +185,8 @@ GEM
     slop (3.4.7)
     sort_alphabetical (1.0.0)
       unicode_utils (>= 1.0.0)
+    spoon (0.0.4)
+      ffi
     spork (0.9.2)
     spreadsheet (0.9.7)
       ruby-ole (>= 1.0)
@@ -203,10 +215,12 @@ DEPENDENCIES
   dm-sqlite-adapter
   factory_girl
   guard-rspec
+  guard-shotgun!
   guard-spork
   launchy
   moneta
   oj
+  oj_mimic_json
   poltergeist
   pry
   puma

@@ -4,7 +4,7 @@ module Public
     get '/product_groups/:id' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json
-      ProductGroup.all(user_id: params[:id], order: :position.asc).to_json(methods: [:product_groups_products])
+      ProductGroup.all_serialized(params[:id])
     end
 
     post '/product_groups' do

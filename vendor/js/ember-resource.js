@@ -617,7 +617,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
       if (value === undefined || value === null || Ember.typeOf(value) === 'boolean') {
         return value;
       } else {
-        return value === 'true';
+        return (value === 'true') || (value === 't');
       }
     }
   });

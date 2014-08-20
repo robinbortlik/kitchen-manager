@@ -18,6 +18,8 @@ gem 'spreadsheet'
 gem 'bcrypt'
 gem 'moneta'
 gem 'oj'
+gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
+gem 'oj_mimic_json'
 
 group :test do
   gem 'rspec'            # Rspec tests

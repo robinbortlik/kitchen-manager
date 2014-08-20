@@ -16,4 +16,6 @@ AppSetting.currency ||= '$'
 AppSetting.admin_name ||= 'admin'
 AppSetting.admin_password ||= 'admin'
 
+Oj.default_options = {mode: :compat }
+
 EXCEPTED_PARAMS = ["splat", "captures", "id", "image_url"]

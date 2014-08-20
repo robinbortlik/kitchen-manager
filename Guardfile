@@ -33,3 +33,11 @@ guard :rspec do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+
+group :server do
+  guard :shotgun, :server => 'puma' do
+    watch(/.+/) # watch *every* file in the directory
+    watch %r{^(lib|models|controllers)/.*\.rb}
+    watch 'config.ru'
+  end
+end

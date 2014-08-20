@@ -3,7 +3,10 @@ module Admin
     protected_get '/product_users' do
       response.headers['Cache-Control'] = 'no-cache'
       content_type :json
-      OjSerializer.serialize ProductUser.all(conditions: ["DATE(created_at) >= ? AND DATE(created_at) <= ?", params[:from], params[:to]]).to_a
+      ProductUser.all_serialized(
+        fields: [:id, :user_id, :product_id, :price, :created_at, :is_paid],
+        conditions: ["DATE(created_at) >= '#{params[:from]}' AND DATE(created_at) <= '#{params[:to]}'"]
+      )
     end
 
     protected_put '/product_users/update_is_paid' do
