@@ -2,7 +2,9 @@
 
 # Kitchen manager
 
-Small application developed in EmberJS which will help us to manage food spend in our company's kitchen
+Electronic stroke board for kitchen or common rooms in companies
+It is small application developed in EmberJS which will help us to manage food spend in our company's kitchen
+
 
 ## How to run application
 
@@ -14,15 +16,31 @@ Small application developed in EmberJS which will help us to manage food spend i
   cd kitchen-manager
 
   # start server
-  rackup
+  puma
 
   # open browser
   localhost:9292
 ```
 
-## How to setup application
+## Setup application
 
-1. Go to administration localhost:9292/admin
+```ruby
+  # start console
+  ./console
+
+  # set currency
+  AppSetting.currency = '$'
+
+  # set admin login name
+  AppSetting.admin_name = 'new_admin_name'
+
+  # set admin password
+  AppSetting.password = 'new_admin_password'
+```
+
+## How to use application
+
+1. Go to localhost:9292/admin
 2. Add users
 3. Add products
 4. Go to home and create your first order

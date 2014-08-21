@@ -33,8 +33,8 @@ describe "overview", :request => true, :js =>true do
     end
 
     set_date_input('#dateFrom', '2014-01-01')
+    wait_for_ajax
     set_date_input('#dateTo', '2014-01-02')
-
     wait_for_ajax
 
     within "table" do
@@ -42,8 +42,8 @@ describe "overview", :request => true, :js =>true do
     end
 
     set_date_input('#dateFrom', product_user.created_at.strftime("%Y-%m-%d"))
+    wait_for_ajax
     set_date_input('#dateTo', product_user.created_at.strftime("%Y-%m-%d"))
-
     wait_for_ajax
 
     within "table" do
