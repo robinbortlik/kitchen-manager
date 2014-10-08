@@ -25,13 +25,14 @@ class ProductUser
   end
 
   def self.popular(user_id)
-    repository(:default).adapter.select('
+    repository(:default).adapter.select("
       SELECT product_id, COUNT(*) as count
       FROM product_users
-      WHERE user_id = ?
+      LEFT JOIN products ON products.id = product_users.product_id
+      WHERE user_id = ? AND (products.deleted IS NOT 't')
       GROUP BY product_id
       ORDER BY count DESC
-      LIMIT 12', user_id)
+      LIMIT 12", user_id)
   end
 
   def self.all_serialized(options = {})
