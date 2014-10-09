@@ -37,9 +37,7 @@ ADD Gemfile /var/www/kitchen-manager/Gemfile
 ADD Gemfile.lock /var/www/kitchen-manager/Gemfile.lock
 
 # # bundle install
-RUN /bin/bash -l -c "bundle install --deployment"
-
-RUN /bin/bash -l -c "service nginx restart"
+RUN /bin/bash -l -c "bundle install --without test"
 
 # # Publish port 80
 EXPOSE 80
@@ -47,9 +45,11 @@ EXPOSE 80
 # Fix ubuntu locale problem
 RUN /bin/bash -l -c "locale-gen en_US en_US.UTF-8"
 RUN /bin/bash -l -c "dpkg-reconfigure locales"
-RUN /bin/bash -l -c "export LC_ALL=en_US.UTF-8"
-RUN /bin/bash -l -c "export LANG=en_US.UTF-8"
 
 # # Startup commands
 # CMD ["bundle", "exec", "puma", "-C", "puma.rb"]
-# ENTRYPOINT bundle exec puma -C puma.rb
+RUN bash -c 'chmod 777 /var/www/kitchen-manager/docker/start.sh'
+
+RUN /bin/bash -l -c "service nginx restart"
+
+CMD ["/bin/bash", "-l", "-c", "/var/www/kitchen-manager/docker/start.sh"]
