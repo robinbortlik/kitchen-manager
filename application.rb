@@ -49,8 +49,8 @@ class Application < Sinatra::Base
     css :vendor_css, ['/vendor/css/*.css']
     js :vendor_js, ['/vendor/js/pegasus.min.js',
       '/vendor/js/jquery-2.1.1-min.js',
-      '/vendor/js/handlebars-1.3.0.js',
-      '/vendor/js/ember-1.8.0-beta.js',
+      '/vendor/js/handlebars-2.0.0.js',
+      '/vendor/js/ember-1.10.0-beta.js',
       '/vendor/js/*.js']
     prebuild true
     expires 86400*365, :public

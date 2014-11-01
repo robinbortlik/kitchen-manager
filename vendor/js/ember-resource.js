@@ -1401,7 +1401,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         }
         Ember.endPropertyChanges(instance);
 
-        options.id = idToRestore;
+        Em.set(options, 'id', idToRestore);
         return instance;
       } else {
         return klass.create(options, data);
