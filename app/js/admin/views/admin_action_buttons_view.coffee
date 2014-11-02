@@ -6,6 +6,7 @@ App.AdminActionButtonsView = Em.View.extend
     openForm: (model) ->
       view = App["Admin#{@get('formName')}Form"].create()
       view.set 'content', @get("content")
+      view.set 'container', App.__container__
       view.appendTo("#ember-app")
 
     destroyResource: ->

@@ -4,7 +4,7 @@
       <div class="dropdown input-group-addon" id="organizationUnitSelect">
         <a data-toggle="dropdown" class="btn btn-primary">{{controller.organizationUnit.name}} <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          {{#each App.store.organizationUnits}}
+          {{#each organizations}}
             <li>
               <a {{action 'changeOrganization' this target='controller'}} data-category-id="{{unbound id}}" data-toggle="dropdown">{{unbound name}}</a>
             </li>
@@ -19,7 +19,7 @@
 
 <div id="usersList">
 {{#if view.controller.selectedUsers}}
-  {{view App.UsersListView contentBinding='controller.selectedUsers'}}
+  {{view "users-list" contentBinding='controller.selectedUsers'}}
 {{else}}
   <h1>There is not user in {{controller.organizationUnit.name}} with name including {{controller.filteredText}}</h1>
 {{/if}}

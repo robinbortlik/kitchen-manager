@@ -3,10 +3,10 @@
   <form class="form-inline">
     <div class="form-group">
       <label class="control-label" id="dateFrom">From
-        {{view App.DatePicker valueBinding='controller.fromDate'}}
+        {{view "date-picker" valueBinding='controller.fromDate'}}
       </label>
       <label class="control-label" id="dateTo">To
-        {{view App.DatePicker valueBinding='controller.toDate'}}
+        {{view "date-picker" valueBinding='controller.toDate'}}
       </label>
       <button class="btn btn-success" {{action 'export' target='view'}}>Export</button>
     </div>
@@ -22,5 +22,5 @@
     {{/each}}
   </thead>
 
-  {{collection tagName='tbody' itemViewClass=App.AdminOverviewRowView contentBinding='App.store.users'}}
+  {{collection tagName='tbody' itemViewClass="admin-overview-row" contentBinding='App.store.users'}}
 </table>

@@ -2,6 +2,7 @@ App.UsersController = Ember.Controller.extend(
   contentBinding: 'App.store.users'
   organizationUnitId: null
   filteredText: null
+  organizationsBinding: 'App.store.organizationUnits'
 
   actions:
     changeOrganization: (e) ->

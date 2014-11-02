@@ -1,4 +1,4 @@
-App.DatePicker = Ember.TextField.extend(
+App.DatePickerView = Ember.TextField.extend(
   _picker: null
 
   modelChangedValue: (->

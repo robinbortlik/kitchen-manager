@@ -6,6 +6,7 @@ App.AdminCategoriesView = Em.View.extend
       view = App.AdminCategoryForm.create()
       category = App.Category.create()
       view.set 'content', category
+      view.set 'container', App.__container__
       view.appendTo("#ember-app")
 
 

@@ -1,5 +1,5 @@
 App.UsersListView = Em.CollectionView.extend
-  itemViewClass: 'App.UserView'
+  itemViewClass: 'user'
 
 App.UserView = Em.View.extend
   template: Em.TEMPLATES['users/item']

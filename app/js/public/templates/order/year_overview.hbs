@@ -8,7 +8,7 @@
       <th>Month</th>
       {{#group}}
         {{#each month in controller.months}}
-          {{view App.YearOverviewColumnHeaderView  contentBinding="month"}}
+          {{view "year-overview-column-header"  contentBinding="month"}}
         {{/each}}
       {{/group}}
     </tr>
@@ -17,11 +17,11 @@
       {{#with view as oldView}}
         {{#group}}
           {{#each month in controller.months}}
-            {{view App.YearOverviewSumView contextBinding="oldView" contentBinding="month"}}
+            {{view "year-overview-sum" contextBinding="oldView" contentBinding="month"}}
           {{/each}}
         {{/group}}
       {{/with}}
     </tr>
   </thead>
-  {{collection tagName='tbody' itemViewClass=App.YearOverviewRowView contentBinding='App.store.products'}}
+  {{collection tagName='tbody' itemViewClass="year-overview-row" contentBinding='App.store.products'}}
 </table>

@@ -1,5 +1,5 @@
 App.ProductsListView = Em.CollectionView.extend
-  itemViewClass: 'App.ProductView'
+  itemViewClass: 'product'
 
 App.ProductView = Em.View.extend
   template: Em.TEMPLATES['products/item']

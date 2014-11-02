@@ -13,7 +13,7 @@
         <td>{{price}}</td>
         <td>{{category.name}}</td>
         <td>{{position}}</td>
-        <td>{{view App.AdminActionButtonsView contentBinding="this" collectionName="products" formName="Product"}}</td>
+        <td>{{view "admin-action-buttons" contentBinding="this" collectionName="products" formName="Product"}}</td>
       </tr>
     {{/each}}
   </tbody>

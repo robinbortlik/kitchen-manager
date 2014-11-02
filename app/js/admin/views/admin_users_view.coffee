@@ -6,6 +6,7 @@ App.AdminUsersView = Em.View.extend
       view = App.AdminUserForm.create()
       user = App.User.create()
       view.set 'content', user
+      view.set 'container', App.__container__
       view.appendTo("#ember-app")
 
 

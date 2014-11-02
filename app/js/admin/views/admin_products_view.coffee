@@ -6,6 +6,7 @@ App.AdminProductsView = Em.View.extend
       view = App.AdminProductForm.create()
       product = App.Product.create()
       view.set 'content', product
+      view.set 'container', App.__container__
       view.appendTo("#ember-app")
 
 

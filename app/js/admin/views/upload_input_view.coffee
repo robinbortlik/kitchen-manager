@@ -1,4 +1,4 @@
-App.UploadInput = Ember.View.extend
+App.UploadInputView = Ember.View.extend
   tagName: 'input'
   attributeBindings: ['type', 'id']
   type: 'file'

@@ -6,6 +6,7 @@ App.AdminOrganizationUnitsView = Em.View.extend
       view = App.AdminOrganizationUnitForm.create()
       category = App.OrganizationUnit.create()
       view.set 'content', category
+      view.set 'container', App.__container__
       view.appendTo("#ember-app")
 
 

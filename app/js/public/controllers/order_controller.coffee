@@ -1,5 +1,6 @@
 App.OrderController = Em.ArrayController.extend(
   contentBinding: 'App.store.products'
+  favouritesBinding: 'App.currentUser.favourites'
   activeProducts: (->
     @get("content").filter (i) -> not i.get("deleted")
   ).property("content.@each.deleted")

@@ -1,5 +1,5 @@
 App.CategoriesListView = Em.CollectionView.extend
-  itemViewClass: 'App.CategoryView'
+  itemViewClass: 'category'
   tagName: 'ul'
   classNameBindings: [':nav', ':nav-tabs']
 

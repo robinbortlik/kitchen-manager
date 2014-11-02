@@ -3,5 +3,5 @@
   {{#link-to 'order.yearOverview' App.currentUser.id view.controller.year class="btn btn-danger btn-lg pull-right"}}Back{{/link-to}}
 </h1>
 <table class="table table-striped  table-hover table-bordered monthOverview">
-  {{collection tagName='tbody' itemViewClass=App.RowOrderMonthOverviewView contentBinding='dayNumbers'}}
+  {{collection tagName='tbody' itemViewClass="row-order-month-overview" contentBinding='dayNumbers'}}
 </table>

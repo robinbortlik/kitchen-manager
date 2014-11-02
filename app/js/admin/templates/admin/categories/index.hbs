@@ -11,7 +11,7 @@
       <tr {{bind-attr class="deleted:danger"}}>
         <td>{{position}}</td>
         <td>{{name}}</td>
-        <td>{{view App.AdminActionButtonsView contentBinding="this" collectionName="categories" formName="Category"}}</td>
+        <td>{{view "admin-action-buttons" contentBinding="this" collectionName="categories" formName="Category"}}</td>
       </tr>
     {{/each}}
   </tbody>
